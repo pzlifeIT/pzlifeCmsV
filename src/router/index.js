@@ -58,7 +58,7 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'history',
-    base: __dirname,
+    base: '/',
     routes: [{
         path: '/',
         component: Home,
@@ -126,7 +126,7 @@ export default new Router({
             path: '/goodsList',
             component: goodsList
         }, {
-            path: '/goodsList/goodDetails',
+            path: '/goodsList-goodDetails',
             component: goodDetails
         }, {
             path: '/supplier',
