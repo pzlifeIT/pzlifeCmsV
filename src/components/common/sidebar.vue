@@ -96,7 +96,7 @@
             onRoutes(){
               // console.log(this.$route.path.match(/(\/[a-zA-Z]*)/))
               // return this.$route.path.replace('/','');
-              return this.$route.path.split('-')[0];
+              return '/'+this.$route.path.split('/')[1];
             }
         }
     }

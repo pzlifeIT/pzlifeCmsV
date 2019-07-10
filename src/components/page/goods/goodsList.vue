@@ -162,7 +162,7 @@ export default {
       })
     },
     gogoodslInfo(id){
-      this.$router.push({ path: '/goodsList-goodDetails', query:{
+      this.$router.push({ path: '/goodsList/goodDetails', query:{
         id:id
       } })
     },
