@@ -3,7 +3,7 @@
     <div class="table-header clearfix">
       <el-breadcrumb class="breadcrumb"  separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-        <el-breadcrumb-item>功能列表</el-breadcrumb-item>
+        <el-breadcrumb-item>组管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="collapse">

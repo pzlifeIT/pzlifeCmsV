@@ -1,7 +1,10 @@
 <template>
   <div  class="tcontent">
     <div class="table-header clearfix">
-      <span class="header-name">成员管理</span>
+      <el-breadcrumb class="breadcrumb"  separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item>权限管理</el-breadcrumb-item>
+        <el-breadcrumb-item>成员管理</el-breadcrumb-item>
+      </el-breadcrumb>
       <el-button class="add fr" type="primary" icon="el-icon-plus" @click="toggleCard(true)">添加成员</el-button>
     </div>
 
