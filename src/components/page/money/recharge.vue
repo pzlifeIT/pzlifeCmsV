@@ -151,16 +151,6 @@ export default {
         type:'input',
         content:'',
         placeholder:'请输入最大收款金额'
-      },{
-        ref:'start_time',
-        label:'创建起始时间',
-        type:'date',
-        content:'',
-      },{
-        ref:'end_time',
-        label:'创建中止时间',
-        type:'date',
-        content:'',
       }],
       AdminRemittance:[],
       total:0

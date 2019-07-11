@@ -27,7 +27,7 @@
           <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="1" :inactive-value="2"></el-switch>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作"  width="350">
+      <el-table-column fixed="right" label="操作" >
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="gogoodslInfo(scope.row.id)">编辑</el-button>
         </template>
