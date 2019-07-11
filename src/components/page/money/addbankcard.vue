@@ -152,9 +152,25 @@ export default {
       })
     },
     sumbit(data){
+      data.ruleForm.id ? this.editAdminBank(data.ruleForm) : this.addAdminBank(data.ruleForm)
+    },
+    addAdminBank(data){
       let that =this;
       that.$request({
-        data: data.ruleForm,
+        data: data,
+        url: 'admin/addAdminBank',
+        form:1,
+        success(res){
+          that.ruleForm = {}
+          that.getAdminBank()
+          that.cardStatus = false
+        }
+      })
+    },
+    editAdminBank(data){
+      let that =this;
+      that.$request({
+        data: data,
         url: 'admin/editAdminBank',
         form:3,
         success(res){
