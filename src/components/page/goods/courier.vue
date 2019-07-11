@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     goFreight(id,type){
+      console.log(id)
       this.$router.push({ path: '/supplier/freight', query:{
         id:id,
         type:type,

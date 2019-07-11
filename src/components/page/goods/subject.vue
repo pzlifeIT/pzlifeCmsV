@@ -145,6 +145,7 @@ export default {
     },
     editsubject(data){
       let that =this;
+      data.subject_image = data.image
       that.$request({
         data: data,
         url: 'subject/editsubject',
@@ -164,7 +165,9 @@ export default {
         },
         url: 'subject/getsubjectdetail',
         success(res){
-          that.ruleForm = res.data || {}
+          res.data = res.data || {}
+          res.data.image = res.data.subject_image
+          that.ruleForm = res.data
           that.ruleType['pid'].hdplay = true
           that.ruleType['order_by'].hdplay = false
           that.cardStatus = true

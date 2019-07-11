@@ -219,6 +219,7 @@ let errCollect = {
         creatBossShareDiamondvip: {
             3001: '手机号格式错误',
             3002: '数字传值有误3002',
+            3003: '该用户不是boss或不存在',
             3005: '超出金额设置范围'
         },
         auditDiamondvipBounty: {

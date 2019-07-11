@@ -25,7 +25,7 @@
     </el-table>
     <v-pagination @pageChange="pageChange" :total="total"></v-pagination>
 
-    <v-card name='供应商' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
+    <v-card name='运费模板' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
     <v-card name='地址' :cardStatus="aCardStatus" :ruleType="aRuleType" :ruleForm="aRuleForm" :rules="aRules" @sumbit="aSumbit" @hideCard="aHideCard"></v-card>
 
@@ -53,7 +53,7 @@ export default {
             multiple:true,
           },
           levels:true,
-          filterable:true,
+          // filterable:true,
           clearable:true,
           collapse:true,
           option:[]
@@ -99,6 +99,7 @@ export default {
   },
   mounted(){
     this.courierId = this.$route.query.id;
+    console.log()
     this.supplierId = this.$route.query.supplierId;
     this.type = this.$route.query.type;
     this.getSupplierFreightdetailList()
@@ -218,7 +219,7 @@ export default {
       let that =this;
       that.$request({
         data: {
-          freight_id:that.supplierId
+          freight_id:that.courierId
         },
         url: 'suppliers/getSupplierFreightdetailList',
         success(res){

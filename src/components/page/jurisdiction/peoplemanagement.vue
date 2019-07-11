@@ -25,8 +25,8 @@
             <span>添加组成员</span>
           </div>
         <el-form label-width="80px" :model="people" ref="people" >
-          <el-form-item  label="组名称" prop="adminid" :rules="[{ required: true, message: '请选择组成员', trigger: 'change' }]">
-            <el-select class="" v-model="people.adminid" placeholder="请选择管理员类型">
+          <el-form-item  label="组成员" prop="adminid" :rules="[{ required: true, message: '请选择组成员', trigger: 'change' }]">
+            <el-select class="" v-model="people.adminid" placeholder="请选择组成员">
               <el-option v-for="item in adminSel" :key="item.id" :label="item.admin_name" :value="item.id">
               </el-option>
             </el-select>
