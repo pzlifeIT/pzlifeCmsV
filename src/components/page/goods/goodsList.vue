@@ -84,6 +84,12 @@ export default {
           },
           option:[]
         },
+        'target_users':{
+          type:'select',
+          label:'适用人群',
+          placeholder:'请选择适用人群',
+          option:[]
+        },
         'image':{
           type:'image',
           label:'产品标题图',

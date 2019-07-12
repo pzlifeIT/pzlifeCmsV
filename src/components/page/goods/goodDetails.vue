@@ -25,6 +25,12 @@
                 <el-form-item label="三级分类" prop="goods_class" >
                   <p class="chart" >{{goods_data.goods_class}}</p>
                 </el-form-item>
+                <el-form-item label="使用人群" prop="goods_class" >
+                  <el-select  v-model="goods_data.target_users" placeholder="使用人群">
+                    <el-option v-for="item in target_users_list" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="产品标题图" prop="image" >
                   <v-upload @upresult='upresult' num='image' :image="goods_data.image"></v-upload>
                 </el-form-item>
@@ -285,6 +291,19 @@ export default {
       goodssubject:[],
       hasGoodssubject:[],
       labellist:[],
+      target_users_list:[{
+        value:1,
+        label:'全部'
+      },{
+        value:2,
+        label:'钻石及以上'
+      },{
+        value:3,
+        label:'创业店主及以上'
+      },{
+        value:4,
+        label:'合伙人及以上'
+      }],
       getAttr:false,
       getFreights:false,
       imageLook:false,
@@ -543,6 +562,7 @@ export default {
     },
     skuSumbit(data){
       let that =this 
+      console.log(data)
       data.ruleForm.sku_id = data.ruleForm.id 
       that.$request({
         data: data.ruleForm,

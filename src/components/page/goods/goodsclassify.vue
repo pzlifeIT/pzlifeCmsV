@@ -36,7 +36,7 @@ export default {
     return {
       cardStatus:false,
       ruleForm:{},
-      rules:['pid','type_name','status'],
+      rules:['pid','type_name'],
       ruleType:{
         'pid':{
           type:'cascader',
@@ -60,7 +60,7 @@ export default {
         'status':{
           type:'select',
           label:'状态',
-          placeholder:'请选择状态',
+          placeholder:'请选择状态(默认停用)',
           option:[{
             value:1,
             label:'启用'
@@ -85,6 +85,8 @@ export default {
     showCard(){
       this.ruleForm = {}
       this.ruleType['pid'].hdplay = false
+      this.ruleType['status'].hdplay = false
+      this.rules = ['pid','type_name']
       this.cardStatus = true
     },
     hideCard(){
@@ -141,8 +143,15 @@ export default {
         },
         url: 'category/editcatepage',
         success(res){
+          if(!res.cate_data){
+            that.$message({message:'上级停用中,无法修改',type:'error' });
+            return
+          }
+          that.rules = ['type_name']
           that.ruleForm = res.cate_data || {}
           that.ruleType['pid'].hdplay = true
+          that.ruleType['status'].hdplay = true
+          
           that.cardStatus = true
         }
       })

@@ -63,6 +63,7 @@ export default {
     },
     'rules': function(newVal){
          this.disrules()
+         console.log(this.cRules)
     },
   },
   mounted(){
@@ -72,7 +73,7 @@ export default {
     console.log(this.cRuleType)
     this.cRuleForm = JSON.parse(JSON.stringify(this.ruleForm))
     this.disrules()
-    
+    console.log(this.cRules)
   },
   components:{    
       vUpload
@@ -120,6 +121,7 @@ export default {
             ruleForm: cRuleForm_copy
           })
         } else {
+          console.log(that.cRules)
           console.log('error submit!!');
           return false;
         }

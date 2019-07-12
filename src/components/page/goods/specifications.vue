@@ -133,11 +133,29 @@ export default {
       this.cardStatus = false
     },
     sumbit(data){
+      data.ruleForm.id ? this.saveEditSpecAttr(data):this.savespecattr(data)
+    },
+    savespecattr(data){
       let that =this;
       data.ruleForm.type = 1
       that.$request({
         data: data.ruleForm,
         url: 'spec/savespecattr',
+        form:1,
+        success(res){
+          that.ruleForm = {}
+          that.getSpecList()
+          that.cardStatus = false
+        }
+      })
+    },
+    saveEditSpecAttr(data){
+      let that =this;
+      data.ruleForm.type = 1
+      data.ruleForm.sa_name = data.ruleForm.spe_name
+      that.$request({
+        data: data.ruleForm,
+        url: 'spec/saveEditSpecAttr',
         form:1,
         success(res){
           that.ruleForm = {}
