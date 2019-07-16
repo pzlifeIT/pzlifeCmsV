@@ -22,6 +22,7 @@
       <el-table-column  prop="supplier" label="前端供应商名称" ></el-table-column>
       <el-table-column  prop="supplier_title" label="后端供应商名称" ></el-table-column>
       <el-table-column  prop="cate" label="分类名称" ></el-table-column>
+      <el-table-column  prop="target_users_text" label="适用人群" ></el-table-column>
       <el-table-column  prop="status" label="状态" >
         <template slot-scope="scope">
           <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="1" :inactive-value="2"></el-switch>
@@ -88,7 +89,19 @@ export default {
           type:'select',
           label:'适用人群',
           placeholder:'请选择适用人群',
-          option:[]
+          option:[{
+            value:1,
+            label:'全部'
+          },{
+            value:2,
+            label:'钻石及以上'
+          },{
+            value:3,
+            label:'创业店主及以上'
+          },{
+            value:4,
+            label:'合伙人及以上'
+          }]
         },
         'image':{
           type:'image',
@@ -134,6 +147,12 @@ export default {
             label: '已下架'
         }]
       }],
+      target_users_json:{
+        1:'全部',
+        2:'钻石及以上',
+        3:'创业店主及以上',
+        4:'合伙人及以上',
+      },
       goodslist:[],
       total:0
     }
@@ -228,10 +247,16 @@ export default {
         data: that.screen,
         url: 'goods/getgoodslist',
         success(res){
-          that.goodslist = res.data
+          that.goodslist = that.disGoodsList(res.data)
           that.total = res.total || 0;
         }
       })
+    },
+    disGoodsList(data = []){
+      for(let i=0,len =data.length;i<len;i++){
+        data[i].target_users_text = this.target_users_json[data[i].target_users]
+      }
+      return data
     }
   }
 }

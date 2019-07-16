@@ -47,7 +47,7 @@ let errCollect = {
         },
         getMessageTemplateText: {},
         saveMessageTask: {
-            3001: '状态码为空',
+            3001: '标题为空',
             3002: '请选择消息模板或触发器',
             3003: '请选择任务类型',
             3004: '该短信模板未启用或者不存在',

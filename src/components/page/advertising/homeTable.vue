@@ -43,6 +43,7 @@
       <el-table-column fixed="right" label="操作"  >
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="getRecommendInfo(scope.row.id)">编辑</el-button>
+          <el-button type="danger" size="small" @click="delRecommend(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -119,6 +120,19 @@ export default {
       }
       this.tableList = list
       this.recommends_info = JSON.parse(JSON.stringify(this.data))
+    },
+    delRecommend(id){
+      let that =this;
+      that.$request({
+        data:{
+          id:id
+        },
+        form:2,
+        url: 'Recommend/delRecommend',
+        success(res){
+          that.$emit('getModel',{id: that.recommends_info.id})
+        }
+      })
     },
     project(data = []){
       let arr = [],len = data.length;
