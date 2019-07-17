@@ -247,16 +247,13 @@ export default {
         data: that.screen,
         url: 'goods/getgoodslist',
         success(res){
-          that.goodslist = that.disGoodsList(res.data)
+          that.goodslist = res.data.map(val=>{
+            val.target_users_text = that.target_users_json[val.target_users]
+            return val
+          })
           that.total = res.total || 0;
         }
       })
-    },
-    disGoodsList(data = []){
-      for(let i=0,len =data.length;i<len;i++){
-        data[i].target_users_text = this.target_users_json[data[i].target_users]
-      }
-      return data
     }
   }
 }

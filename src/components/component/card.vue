@@ -18,7 +18,7 @@
 
             <el-cascader v-if="v.type === 'cascader'" :options="v.option"  :props="v.props"  v-model="cRuleForm[k]" :show-all-levels="v.levels" :filterable="v.filterable" :collapse-tags="v.collapse" :clearable="v.clearable" ></el-cascader>
 
-            <el-date-picker v-if="v.type === 'date'" v-model="cRuleForm[k]" type="datetime"  value-format="yyyy-MM-dd HH:mm:ss" :placeholder="v.placeholder" default-time="00:00:00"></el-date-picker>
+            <el-date-picker v-if="v.type === 'date'" v-model= "cRuleForm[k]" type="datetime"  value-format="yyyy-MM-dd HH:mm:ss" :placeholder="v.placeholder" default-time="00:00:00"></el-date-picker>
 
             <v-upload v-if="v.type === 'image'" @upresult='upresult' :num='k' :image="cRuleForm[k]"></v-upload>
 

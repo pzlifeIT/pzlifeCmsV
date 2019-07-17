@@ -43,6 +43,10 @@ const bossShare = r => require.ensure([], () => r(require('../components/page/ac
 const offline = r => require.ensure([], () => r(require('../components/page/activity/offline')), 'offline')
 const offlineGoods = r => require.ensure([], () => r(require('../components/page/activity/offlineGoods')), 'offlineGoods')
 const lucky = r => require.ensure([], () => r(require('../components/page/activity/lucky')), 'lucky')
+const coupons = r => require.ensure([], () => r(require('../components/page/activity/coupons')), 'coupons')
+const coupons_associated = r => require.ensure([], () => r(require('../components/page/activity/coupons_associated')), 'coupons_associated')
+const couponsHd = r => require.ensure([], () => r(require('../components/page/activity/couponsHd')), 'couponsHd')
+const couponsHd_associated = r => require.ensure([], () => r(require('../components/page/activity/couponsHd_associated')), 'couponsHd_associated')
 
 const homePage = r => require.ensure([], () => r(require('../components/page/advertising/homePage')), 'homePage')
 
@@ -161,6 +165,18 @@ export default new Router({
         }, {
             path: '/lucky',
             component: lucky
+        }, {
+            path: '/coupons',
+            component: coupons
+        }, {
+            path: '/coupons/coupons_associated',
+            component: coupons_associated
+        }, {
+            path: '/couponsHd',
+            component: couponsHd
+        }, {
+            path: '/couponsHd/couponsHd_associated',
+            component: couponsHd_associated
         }, {
             path: '/homePage',
             component: homePage
