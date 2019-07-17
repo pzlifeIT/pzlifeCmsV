@@ -75,7 +75,7 @@ export default {
         url: 'coupons/unbindcouponhd',
         form:2,
         success(res){
-          that.total == 11 ?that.pageChange({page:1}) :that.gethdcouponlist()
+          (parseInt(that.total)%10) === 1 ?that.pageChange({page:1}) :that.gethdcouponlist()
         }
       })
     },
