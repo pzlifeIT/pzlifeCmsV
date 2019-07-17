@@ -159,6 +159,7 @@ export default {
     },
     addcouponhd(data){
       let that =this;
+      console.log(data.title.length)
       if(data.title.length > 50){
         that.$message({message:'标题过长',type:'error' });
         return
@@ -176,6 +177,10 @@ export default {
     },
     modifycouponhd(data){
       let that =this;
+      if(data.title.length > 50){
+        that.$message({message:'标题过长',type:'error' });
+        return
+      }
       that.$request({
         data: data,
         url: 'coupons/modifycouponhd',

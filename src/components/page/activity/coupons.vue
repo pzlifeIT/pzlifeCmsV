@@ -145,6 +145,10 @@ export default {
     },
     modifycoupon(data){
       let that =this;
+      if(data.title.length > 50){
+        that.$message({message:'标题过长',type:'error' });
+        return
+      }
       that.$request({
         data: data,
         url: 'coupons/modifycoupon',
