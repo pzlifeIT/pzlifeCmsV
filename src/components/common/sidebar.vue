@@ -4,7 +4,7 @@
             <el-menu-item index="index">
                 <span class="sb-cn">首页</span>
             </el-menu-item>
-            <el-submenu v-for="(v,k) in menuList" :key="k" :index="k+1">
+            <el-submenu v-for="(v,k) in menuList" :key="k" :index="k+''">
                 <template slot="title">
                     <span class="sb-cn">{{v.name}}</span>
                 </template>

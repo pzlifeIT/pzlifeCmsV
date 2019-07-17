@@ -102,7 +102,7 @@ export default {
         form:2,
         url: 'coupons/deletecouponhd',
         success(res){
-          that.getcouponhdlist()
+          that.total == 11 ?that.pageChange({page:1}) :that.getcouponhdlist()
         }
       })
     },

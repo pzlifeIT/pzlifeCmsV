@@ -4,7 +4,7 @@
       <el-breadcrumb class="breadcrumb"  separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>活动管理</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/couponsHd' }">优惠券活动</el-breadcrumb-item>
-        <el-breadcrumb-item>活动优惠券列表:({{title}})</el-breadcrumb-item>
+        <el-breadcrumb-item class="title">活动优惠券列表:({{title}})</el-breadcrumb-item>
       </el-breadcrumb>
       <el-button class="add fr" type="primary" icon="el-icon-plus" @click="showCard()">关联优惠券</el-button>
   </div>
@@ -77,7 +77,7 @@ export default {
         url: 'coupons/unbindcouponhd',
         form:2,
         success(res){
-          that.gethdcoupon()
+          that.total == 11 ?that.pageChange({page:1}) :that.gethdcoupon()
         }
       })
     },

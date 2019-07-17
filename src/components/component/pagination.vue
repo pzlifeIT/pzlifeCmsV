@@ -14,6 +14,7 @@ export default {
   },
   watch: {
     'total': function(newVal){
+       console.log(newVal)
         this.$refs.pagination.internalCurrentPage = 1;
         this.vTotal = this.total
     },
@@ -26,6 +27,7 @@ export default {
   },
   methods: {
     pageChange(val){
+      console.log('pageChange',val)
       this.$emit('pageChange',{
         page: val
       })
