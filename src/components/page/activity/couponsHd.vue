@@ -36,16 +36,12 @@
         <div slot="header" class="clearfix">
             <span>二维码</span>
           </div>
-        <el-form label-width="80px" :model="qrRuleForm" ref="qrRuleForm"  :rules="qrRules">
-          <el-form-item v-if="!!Qrcode">
-            <img v-if="Qrcode"  class="qrcode" :src="Qrcode" alt="二维码">
-          </el-form-item>
-          <el-form-item label="分享者ID" v-else  >
-            <el-input v-model="qrRuleForm.uid" placeholder="请输入分享者ID"></el-input>
+        <el-form label-width="80px"  ref="qrRuleForm">
+          <el-form-item >
+            <img class="qrcode" :src="Qrcode" alt="二维码">
           </el-form-item>
           <el-form-item class="flex-cen">
-            <el-button v-if="!!Qrcode" type="primary" @click="qrCodeDownload('qrRuleForm')">下载</el-button>
-            <el-button v-else type="primary" @click="qrSumbit('qrRuleForm')">确定</el-button>
+            <el-button  type="primary" @click="qrCodeDownload('qrRuleForm')">下载</el-button>
             <el-button  @click="hideQrCard()">取消</el-button>
           </el-form-item>
         </el-form>
@@ -63,14 +59,6 @@ export default {
     return {
       qrCodeCard:false,
       cardStatus:false,
-      qrRules:{
-        'uid':[{
-          required:true,
-          message:'请输入分享者ID',
-          trigger:'blur'
-        }]
-      },
-      qrRuleForm:{},
       ruleForm:{},
       rules:['title'],
       ruleType:{
@@ -144,31 +132,24 @@ export default {
       this.cardStatus = false
     },
     showQrCard(id,tit){
-      this.qrRuleForm = { id:id }
-      this.Qrcode = ''
-      this.offlineTitle = tit
-      this.qrCodeCard = true
+      let that =this
+      that.Qrcode = ''
+      that.offlineTitle = tit
+      that.$request({
+        data: {
+          page:'pages/coupon/getcoupon/getcoupon',
+          scene:'yid='+id
+        },
+        url: 'OfflineActivities/getQrcode',
+        type:'get',
+        success(res){
+          that.Qrcode = res.Qrcode
+          that.qrCodeCard = true
+        }
+      })
     },
     hideQrCard(){
       this.qrCodeCard = false
-    },
-    qrSumbit(name){
-      let that= this;
-      that.$refs[name].validate((valid) => {
-        if (valid) {
-            that.$request({
-              data: that.qrRuleForm,
-              url: 'OfflineActivities/resetOfflineActivitiesQrcode',
-              type:'get',
-              success(res){
-                that.Qrcode = res.Qrcode
-              }
-            })
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
     },
     qrCodeDownload() {
         downloadIamge(this.Qrcode, this.offlineTitle)
@@ -178,6 +159,10 @@ export default {
     },
     addcouponhd(data){
       let that =this;
+      if(data.title.length > 50){
+        that.$message({message:'标题过长',type:'error' });
+        return
+      }
       that.$request({
         data: data,
         url: 'coupons/addcouponhd',
