@@ -13,7 +13,8 @@
       <el-table-column prop="title" label="标题" ></el-table-column>
       <el-table-column prop="price" label="优惠金额" ></el-table-column>
       <el-table-column prop="level_text" label="优惠券类型" ></el-table-column>
-      <el-table-column prop="gs_id" label="优惠券内容" ></el-table-column>
+      <el-table-column prop="gs_id" label="商品或专题id" ></el-table-column>
+      <el-table-column prop="name" label="商品或专题名称" ></el-table-column>
       <el-table-column prop="days" label="领取后几天有效" ></el-table-column>
       <el-table-column fixed="right" label="操作" width="350" >
         <template slot-scope="scope">
