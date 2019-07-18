@@ -14,8 +14,7 @@ export default {
   },
   watch: {
     'total': function(newVal){
-       console.log(newVal)
-        this.$refs.pagination.internalCurrentPage = 1;
+        // this.$refs.pagination.internalCurrentPage = 1;
         this.vTotal = this.total
     },
     'num': function(newVal){
