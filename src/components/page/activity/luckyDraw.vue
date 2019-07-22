@@ -3,25 +3,20 @@
     <div class="table-header clearfix">
       <el-breadcrumb class="breadcrumb"  separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-        <el-breadcrumb-item>线下活动</el-breadcrumb-item>
+        <el-breadcrumb-item>小程序抽奖活动</el-breadcrumb-item>
       </el-breadcrumb>
       <el-button class="add fr" type="primary" icon="el-icon-plus" @click="showCard()">添加活动</el-button>
   </div>
 
-    <el-table :data="offlineList" border style="width: 100%">
+    <el-table :data="ldList" border style="width: 100%">
       <el-table-column prop="id" label="ID"></el-table-column>
       <el-table-column  prop="title" label="标题" ></el-table-column>
-      <el-table-column  prop="image_path" label="图片" >
-        <template slot-scope="scope">
-          <img :src="scope.row.image_path" width="40"  class="head_pic"/>
-        </template>
-      </el-table-column>
       <el-table-column  prop="start_time" label="活动开始时间" ></el-table-column>
-      <el-table-column  prop="stop_time" label="活动停止时间" ></el-table-column>
+      <el-table-column  prop="end_time" label="活动结束时间" ></el-table-column>
       <el-table-column  prop="create_time" label="创建时间" ></el-table-column>
       <el-table-column fixed="right" label="操作" width="350" >
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="getOfflineActivitiesInfo(scope.row.id)">编辑</el-button>
+          <el-button type="primary" size="small" @click="getHdInfo(scope.row.id)">编辑</el-button>
           <el-button type="primary" size="small" @click="goOfflineGoods(scope.row.id)">活动商品</el-button>
           <el-button type="primary" size="small" @click="showQrCard(scope.row.id,scope.row.title)">二维码</el-button>
         </template>
@@ -72,7 +67,7 @@ export default {
       },
       qrRuleForm:{},
       ruleForm:{},
-      rules:['title','start_time','stop_time','image_path'],
+      rules:['title','start_time','end_time'],
       ruleType:{
         'title':{
           type:'input',
@@ -84,15 +79,10 @@ export default {
           label:'开始时间',
           placeholder:'请输入开始时间'
         },
-        'stop_time':{
+        'end_time':{
           type:'date',
           label:'结束时间',
           placeholder:'请输入结束时间'
-        },
-        'image_path':{
-          type:'image',
-          label:'图片',
-          placeholder:'请上传图片'
         }
       },
       screen:{
@@ -101,7 +91,7 @@ export default {
       },
       Qrcode:'',
       offlineTitle:'',
-      offlineList:[],
+      ldList:[],
       total:0
     }
   },
@@ -110,21 +100,21 @@ export default {
       vCard
   },
   mounted(){
-    this.getOfflineActivities()
+    this.getHd()
   },
   methods: {
     goOfflineGoods(id){
-      this.$router.push({ path: '/offline/offlineGoods', query:{
+      this.$router.push({ path: '/luckyDraw/luckyDrawGoods', query:{
         id:id
       } })
     },
-    getOfflineActivitiesInfo(id){
+    getHdInfo(id){
       let that =this;
       that.$request({
         data: {
           id:id
         },
-        url: 'OfflineActivities/getOfflineActivities',
+        url: 'coupons/getHd',
         success(res){
           that.ruleForm = res.result || {}
           that.cardStatus = true
@@ -153,7 +143,7 @@ export default {
         if (valid) {
             that.$request({
               data: that.qrRuleForm,
-              url: 'OfflineActivities/resetOfflineActivitiesQrcode',
+              url: 'coupons/resetcouponsQrcode',
               type:'get',
               success(res){
                 that.Qrcode = res.Qrcode
@@ -169,45 +159,45 @@ export default {
         downloadIamge(this.Qrcode, this.offlineTitle)
     },
     sumbit(data){
-      data.ruleForm.id ?this.updateOfflineActivities(data.ruleForm):this.addOfflineActivities(data.ruleForm)
+      data.ruleForm.id ?this.updateHd(data.ruleForm):this.saveHd(data.ruleForm)
     },
-    addOfflineActivities(data){
+    saveHd(data){
       let that =this;
       that.$request({
         data: data,
-        url: 'OfflineActivities/addOfflineActivities',
+        url: 'coupons/saveHd',
         form:1,
         success(res){
           that.ruleForm = {}
-          that.getOfflineActivities()
+          that.getHd()
           that.cardStatus = false
         }
       })
     },
-    updateOfflineActivities(data){
+    updateHd(data){
       let that =this;
       that.$request({
         data: data,
-        url: 'OfflineActivities/updateOfflineActivities',
+        url: 'coupons/updateHd',
         form:3,
         success(res){
           that.ruleForm = {}
-          that.getOfflineActivities()
+          that.getHd()
           that.cardStatus = false
         }
       })
     },
     pageChange(obj){
         this.screen.page = obj.page
-        this.getOfflineActivities()
+        this.getHd()
     },
-    getOfflineActivities(){
+    getHd(){
       let that =this;
       that.$request({
         data: that.screen,
-        url: 'OfflineActivities/getOfflineActivities',
+        url: 'coupons/getHd',
         success(res){
-          that.offlineList = res.result
+          that.ldList = res.luckydraw
           that.total = res.total || 0;
         }
       })

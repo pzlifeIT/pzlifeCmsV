@@ -47,6 +47,8 @@ const coupons = r => require.ensure([], () => r(require('../components/page/acti
 const coupons_associated = r => require.ensure([], () => r(require('../components/page/activity/coupons_associated')), 'coupons_associated')
 const couponsHd = r => require.ensure([], () => r(require('../components/page/activity/couponsHd')), 'couponsHd')
 const couponsHd_associated = r => require.ensure([], () => r(require('../components/page/activity/couponsHd_associated')), 'couponsHd_associated')
+const luckyDraw = r => require.ensure([], () => r(require('../components/page/activity/luckyDraw')), 'luckyDraw')
+const luckyDrawGoods = r => require.ensure([], () => r(require('../components/page/activity/luckyDrawGoods')), 'luckyDrawGoods')
 
 const homePage = r => require.ensure([], () => r(require('../components/page/advertising/homePage')), 'homePage')
 
@@ -177,6 +179,12 @@ export default new Router({
         }, {
             path: '/couponsHd/couponsHd_associated',
             component: couponsHd_associated
+        }, {
+            path: '/luckyDraw',
+            component: luckyDraw
+        }, {
+            path: '/couponsHd/luckyDrawGoods',
+            component: luckyDrawGoods
         }, {
             path: '/homePage',
             component: homePage

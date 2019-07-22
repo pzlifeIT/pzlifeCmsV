@@ -8,7 +8,7 @@
       </el-breadcrumb>
       <el-button class="add fr" type="primary" icon="el-icon-plus" @click="showCard()">添加商品</el-button>
   </div>
-  
+
     <el-table :data="goodList" border style="width: 100%">
       <el-table-column type="index" label="序号"></el-table-column>
       <el-table-column  prop="goods_id" label="商品id" ></el-table-column>
@@ -21,7 +21,6 @@
         </template>
       </el-table-column>
     </el-table>
-    <v-pagination @pageChange="pageChange" :total="total"></v-pagination>
 
     <v-card name='商品' :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
@@ -30,19 +29,53 @@
 
 <script>
 import vScreen from '../../component/screen'
-import vPagination from '../../component/pagination'
 import vCard from '../../component/card'
 export default {
   data(){
     return {
       cardStatus:false,
       ruleForm:{},
-      rules:['goods_id'],
+      rules:['title'],
       ruleType:{
-        'goods_id':{
+        'title':{
           type:'input',
-          label:'商品id',
-          placeholder:'请输入商品id'
+          label:'奖品名称',
+          placeholder:'请输入奖品名称'
+        },
+        'probability':{
+          type:'number',
+          label:'中奖概率',
+          placeholder:'请输入中奖概率'
+        },
+        'probability':{
+          type:'number',
+          label:'中奖概率',
+          placeholder:'请输入中奖概率'
+        },
+        'kind':{
+          type:'select',
+          label:'抽奖种类',
+          placeholder:'请选择抽奖种类',
+          option:[{
+            value:'1',
+            label:'优惠券'
+          },{
+            value:'2',
+            label:'商品SKU'
+          },{
+            value:'1',
+            label:'积分'
+          }]
+        },
+        'debris':{
+          type:'input',
+          label:'碎片个数',
+          placeholder:'请输入碎片个数'
+        },
+        'image':{
+          type:'image',
+          label:'图片',
+          placeholder:'请上传图片'
         }
       },
       screen:{
@@ -50,8 +83,7 @@ export default {
         page_num:10,
         active_id:''
       },
-      goodList:[],
-      total:0
+      goodList:[]
     }
   },
   components:{
@@ -60,7 +92,7 @@ export default {
   },
   mounted(){
     this.screen.active_id = this.$route.query.id;
-    this.getOfflineActivitiesGoods()
+    this.getHdGoods()
   },
   methods: {
     getGoodInfo(id,gid){
@@ -92,56 +124,43 @@ export default {
     },
     sumbit(data){
       data.ruleForm.active_id = this.screen.active_id;
-      data.ruleForm.id ?this.updateOfflineActivitiesGoods(data.ruleForm):this.addOfflineActivitiesGoods(data.ruleForm)
+      data.ruleForm.id ?this.saveHdGoods(data.ruleForm):this.addHdGoods(data.ruleForm)
     },
-    addOfflineActivitiesGoods(data){
+    addHdGoods(data){
       let that =this;
       that.$request({
         data: data,
-        url: 'OfflineActivities/addOfflineActivitiesGoods',
+        url: 'coupons/addHdGoods',
         form:1,
         success(res){
           that.ruleForm = {}
-          that.getOfflineActivitiesGoods()
+          that.getHdGoods()
           that.cardStatus = false
         }
       })
     },
-    updateOfflineActivitiesGoods(data){
+    saveHdGoods(data){
       let that =this;
       that.$request({
         data: data,
-        url: 'OfflineActivities/updateOfflineActivitiesGoods',
+        url: 'coupons/saveHdGoods',
         form:3,
         success(res){
           that.ruleForm = {}
-          that.getOfflineActivitiesGoods()
+          that.getHdGoods()
           that.cardStatus = false
         }
       })
     },
-    pageChange(obj){
-        this.screen.page = obj.page
-        this.getOfflineActivitiesGoods()
-    },
-    getOfflineActivitiesGoods(){
+    getHdGoods(){
       let that =this;
       that.$request({
         data: that.screen,
-        url: 'OfflineActivities/getOfflineActivitiesGoods',
+        url: 'coupons/getHdGoods',
         success(res){
-          that.goodList = that.disGoodList(res.result)
-          that.total = res.totle || 0;
+          that.goodList = res.result
         }
       })
-    },
-    disGoodList(data = []) {
-        let len = data.length;
-        if (len === 0) return
-        for (let i = 0; i < len; i++) {
-            data[i].statusText = (data[i].goods.status == 1)?'上架中' : '已下架'
-        }
-        return data
     },
   }
 }

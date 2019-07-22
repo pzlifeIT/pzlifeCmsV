@@ -138,7 +138,7 @@ export default {
       that.$request({
         data: {
           page:'pages/coupon/getcoupon/getcoupon',
-          scene:'yid='+id
+          scene:'id='+id
         },
         url: 'OfflineActivities/getQrcode',
         type:'get',

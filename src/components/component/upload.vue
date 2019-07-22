@@ -140,7 +140,8 @@ export default {
   text-align: center;
 }
 .avatar {
-  width: 60px;
+  width: auto;
+  min-width: 60px;
   height: 60px;
   display: block;
   cursor: pointer;
