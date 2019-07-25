@@ -65,7 +65,7 @@ export default {
         let len = data.length;
         if (len === 0) return
         for (let i = 0; i < len; i++) {
-            data[i].statusText = (data[i].status == 1)?'已领取' : '未领取'
+            data[i].statusText = (data[i].status == 1)?'未领取' : '已领取'
         }
         return data
     },
