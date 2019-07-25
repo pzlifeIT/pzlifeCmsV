@@ -165,19 +165,19 @@ export default {
     sumbit(data){
       data.ruleForm.hd_id = this.hd_id;
       if(data.ruleForm.probability < 0) {
-        that.$message({message:'中奖概率不能小于0',type:'error' });
+        this.$message({message:'中奖概率不能小于0',type:'error' });
         return
       }
-      if(parseInt(data.ruleForm.number) < 0) {
-        that.$message({message:'碎片个数不能为负数',type:'error' });
+      if(parseInt(data.ruleForm.debris) < 0) {
+        this.$message({message:'碎片个数不能为负数',type:'error' });
         return
       }
       if(parseInt(data.ruleForm.stock) < 0) {
-        that.$message({message:'库存不能为负数',type:'error' });
+        this.$message({message:'库存不能为负数',type:'error' });
         return
       }
       if(parseInt(data.ruleForm.winnings_number) < 0) {
-        that.$message({message:'可中数量不能为负数',type:'error' });
+        this.$message({message:'可中数量不能为负数',type:'error' });
         return
       }
       let that =this;
