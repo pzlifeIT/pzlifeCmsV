@@ -19,7 +19,7 @@
           <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="2" :inactive-value="1"></el-switch>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作"  >
+      <el-table-column fixed="right" label="操作" width="250" >
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="getHdInfo(scope.row.id)">编辑</el-button>
           <el-button type="primary" size="small" @click="goluckyDrawGoods(scope.row.id)">活动商品</el-button>
