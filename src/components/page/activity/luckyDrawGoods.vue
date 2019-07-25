@@ -194,8 +194,8 @@ export default {
     },
     sSumbit(data){
       let that =this;
-      if(data.ruleForm.order < 0) {
-        that.$message({message:'排序不能为负数',type:'error' });
+      if(parseInt(data.ruleForm.order) < 1) {
+        that.$message({message:'排序不能小于1',type:'error' });
         return
       }
       that.$request({
