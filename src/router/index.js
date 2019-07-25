@@ -183,7 +183,7 @@ export default new Router({
             path: '/luckyDraw',
             component: luckyDraw
         }, {
-            path: '/couponsHd/luckyDrawGoods',
+            path: '/luckyDraw/luckyDrawGoods',
             component: luckyDrawGoods
         }, {
             path: '/homePage',
