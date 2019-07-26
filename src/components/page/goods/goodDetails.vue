@@ -139,8 +139,8 @@
 
     <v-card name='排序' :cardStatus="imgCardStatus" :ruleType="imgRuleType" :ruleForm="imgRuleForm" :rules="imgRules" @sumbit="imgSumbit" @hideCard="imgHideCard"></v-card>
 
-    <div class="cen-card" v-if="imageLook">
-      <el-card class="box-card" >
+    <div class="cen-card" v-if="imageLook" >
+      <el-card class="box-card preview" >
         <div slot="header" class="clearfix">
             <span>预览</span>
           </div>
@@ -861,5 +861,8 @@ export default {
 }
 .infoList::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
+}
+.preview{
+  width:700px;
 }
 </style>

@@ -1,15 +1,16 @@
 <template>
   <div class="flex-cen pagination">
-      <el-pagination :hide-on-single-page="true" background @current-change="pageChange" ref="pagination"  layout="prev, pager, next" :total="vTotal"> </el-pagination>
+      <el-pagination :hide-on-single-page="true" background @current-change="pageChange"  ref="pagination"  layout="prev, pager, next" :total="vTotal"> </el-pagination>
     </div>
 </template>
 
 <script>
 export default {
-  props: ['total','num'],
+  props: ['total','num','page'],
   data(){
     return {
-      vTotal:0
+      vTotal:0,
+      vPage:1
     }
   },
   watch: {
@@ -19,6 +20,9 @@ export default {
     },
     'num': function(newVal){
         this.$refs.pagination.internalCurrentPage = 1;
+    },
+    'page': function(newVal){
+        this.$refs.pagination.internalCurrentPage = this.page;
     }
   },
   mounted(){
