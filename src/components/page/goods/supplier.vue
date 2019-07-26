@@ -28,7 +28,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <v-pagination @pageChange="pageChange" :num='num' :total="total"></v-pagination>
+    <v-pagination @pageChange="pageChange" :num='num' :total="total" :page="page"></v-pagination>
 
     <v-card name='供应商' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
@@ -78,6 +78,7 @@ export default {
         page:1,
         page_num:10
       },
+      page:1,
       screenQuery:[{
         ref:'supplierName',
         label:'供应商名称',
@@ -94,6 +95,8 @@ export default {
       vCard
   },
   mounted(){
+    this.screen.page = parseInt(localStorage.getItem("supplier")) || 1
+    this.page = this.screen.page
     this.getsuppliers()
   },
   methods: {
@@ -154,6 +157,7 @@ export default {
     onQuery(screen){
       this.extend(this.screen,screen);
       this.screen.page = 1;
+      localStorage.setItem("supplier", 1)
       this.num++
       this.getsuppliers();
     },
@@ -165,6 +169,7 @@ export default {
     },
     pageChange(obj){
         this.screen.page = obj.page
+        localStorage.setItem("supplier", obj.page)
         this.getsuppliers()
     },
     getsuppliers(){

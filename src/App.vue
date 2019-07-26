@@ -6,10 +6,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted(){
+    localStorage.setItem("goodList", 1)
+    localStorage.setItem("supplier", 1)
+    localStorage.setItem("orderList", 1)
+  }
 }
 </script>
 
 <style>
-  @import "../static/css/main.css"
+  @import "../static/css/main.css";
 </style>

@@ -42,7 +42,7 @@
             <el-form-item label="收件人:"><span class="text">{{order_info.linkman}}</span></el-form-item>
             <el-form-item label="联系电话:"><span>{{order_info.linkphone}}</span></el-form-item>
             <el-form-item label="收货地址:"><span>{{order_info.province_name}} {{order_info.city_name}} {{order_info.area_name}} {{order_info.address}}</span></el-form-item>
-            <el-form-item label="留言信息:"><span>{{order_info.deduction_money}}</span></el-form-item>
+            <el-form-item label="留言信息:"><span></span></el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="物流管理" name="fourth">

@@ -27,7 +27,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <v-pagination @pageChange="pageChange" :num='num' :total="total"></v-pagination>
+    <v-pagination @pageChange="pageChange" :num='num' :total="total" :page="page"></v-pagination>
 
   </div>
 </template>
@@ -42,6 +42,7 @@ export default {
         page:1,
         page_num:10
       },
+      page:1,
       num:1,
       screenQuery:[{
         ref:'order_no',
@@ -105,6 +106,8 @@ export default {
       vPagination,
   },
   mounted(){
+    this.screen.page = parseInt(localStorage.getItem("orderList")) || 1
+    this.page = this.screen.page
     this.getOrders()
   },
   methods: {
@@ -116,6 +119,7 @@ export default {
     onQuery(screen){
       this.extend(this.screen,screen);
       this.screen.page = 1;
+      localStorage.setItem("orderList", 1)
       this.num++;
       this.getOrders();
     },
@@ -127,6 +131,7 @@ export default {
     },
     pageChange(obj){
         this.screen.page = obj.page
+        localStorage.setItem("orderList", obj.page)
         this.getOrders()
     },
     getOrders(){
