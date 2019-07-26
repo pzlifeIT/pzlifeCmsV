@@ -78,7 +78,7 @@
           </el-table>
 
           <el-table :data="sku" class="table" border>
-            <el-table-column type="index" label="序号"></el-table-column>
+            <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column  prop="attr" label="规格名称" >
             </el-table-column>
             <el-table-column  prop="sku_image" label="规格图" >
