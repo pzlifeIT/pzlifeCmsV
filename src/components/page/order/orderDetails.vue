@@ -21,8 +21,8 @@
             <el-form-item label="优惠金额:"><span>{{order_info.discount_money}}</span></el-form-item>
             <el-form-item label="支付类型:"><span>{{order_info.pay_type_text}}</span></el-form-item>
             <el-form-item label="第三方支付金额:"><span>{{order_info.third_money}}</span></el-form-item>
-            <el-form-item label="第三方支付类型:"><span>{{order_info.third_pay_type}}</span></el-form-item>
-            <el-form-item label="订单状态:"><span>{{order_info.order_status}}</span></el-form-item>
+            <el-form-item label="第三方支付类型:"><span>{{order_info.third_pay_type_text}}</span></el-form-item>
+            <el-form-item label="订单状态:"><span>{{order_info.order_status_text}}</span></el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="商品清单" name="second">
