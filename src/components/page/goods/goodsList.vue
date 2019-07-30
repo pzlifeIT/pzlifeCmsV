@@ -164,8 +164,8 @@ export default {
       vCard
   },
   mounted(){
-    this.screen.page = parseInt(localStorage.getItem("goodList")) || 1
-    this.page = this.screen.page
+    // this.screen.page = parseInt(localStorage.getItem("goodList")) || 1
+    // this.page = this.screen.page
     this.getgoodslist()
     this.getAllSuppliers()
     this.getAllCateList()
@@ -231,7 +231,7 @@ export default {
     onQuery(screen){
       this.extend(this.screen,screen);
       this.screen.page = 1;
-      localStorage.setItem("goodList",1)
+      // localStorage.setItem("goodList",1)
       this.num++
       this.getgoodslist();
     },
@@ -243,7 +243,7 @@ export default {
     },
     pageChange(obj){
         this.screen.page = obj.page
-        localStorage.setItem("goodList", obj.page)
+        // localStorage.setItem("goodList", obj.page)
         this.getgoodslist()
     },
     getgoodslist(){
@@ -252,10 +252,11 @@ export default {
         data: that.screen,
         url: 'goods/getgoodslist',
         success(res){
-          that.goodslist = res.data.map(val=>{
+          that.goodslist = !res.data? [] : res.data.map(val=>{
             val.target_users_text = that.target_users_json[val.target_users]
             return val
           })
+          console.log(that.goodslist)
           that.total = res.total || 0;
         }
       })

@@ -130,7 +130,10 @@ export default new Router({
             component: orderDetails
         }, {
             path: '/goodsList',
-            component: goodsList
+            component: goodsList,
+            meta: {
+                keepAlive: true
+            }
         }, {
             path: '/goodsList/goodDetails',
             component: goodDetails
