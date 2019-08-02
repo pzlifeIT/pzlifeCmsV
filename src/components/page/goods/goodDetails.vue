@@ -12,7 +12,7 @@
       <el-tabs class="eltabs" value="first" type="card" >
         <el-tab-pane label="基本信息" name="first">
             <div class="box-card" >
-              <el-form label-width="100px" :model="goods_data" ref="goods_data"  label-position="right" :rules="rules">
+              <el-form label-width="110px" :model="goods_data" ref="goods_data"  label-position="right" :rules="rules">
                 <el-form-item label="商品名称" prop="goods_name" >
                   <el-input v-model="goods_data.goods_name"    placeholder="请输入商品名称"></el-input>
                 </el-form-item>
@@ -33,6 +33,9 @@
                 </el-form-item>
                 <el-form-item label="产品标题图" prop="image" >
                   <v-upload @upresult='upresult' num='image' :image="goods_data.image"></v-upload>
+                </el-form-item>
+                <el-form-item label="商品分享标题图" prop="share_image" >
+                  <v-upload @upresult='shareUpresult' num='share_image' :image="goods_data.share_image"></v-upload>
                 </el-form-item>
                 <el-form-item class="flex-cen">
                   <el-button  type="primary" @click="gSumbit('goods_data')">确定</el-button>
@@ -484,6 +487,9 @@ export default {
     },
     upresult(data){
         this.goods_data.image = data.image_path
+    },
+    shareUpresult(data){
+      this.goods_data.share_image = data.image_path
     },
     banner(data){
       let formdata = new FormData();

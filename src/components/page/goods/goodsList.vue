@@ -36,7 +36,7 @@
     </el-table>
     <v-pagination @pageChange="pageChange" :num='num' :total="total" :page="page"></v-pagination>
 
-    <v-card name='添加商品基本信息' width="100" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
+    <v-card name='添加商品基本信息' width="110" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
   </div>
 </template>
@@ -107,6 +107,10 @@ export default {
           type:'image',
           label:'产品标题图',
           placeholder:'请上传图片'
+        },
+        'share_image':{
+          type:'image',
+          label:'商品分享标题图'
         }
       },
       screen:{
