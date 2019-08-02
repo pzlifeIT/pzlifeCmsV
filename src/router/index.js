@@ -60,6 +60,8 @@ const account = r => require.ensure([], () => r(require('../components/page/supm
 
 const login = r => require.ensure([], () => r(require('../components/login/login')), 'login')
 
+const modifyPwd = r => require.ensure([], () => r(require('../components/page/jurisdiction/modifyPwd')), 'modifyPwd')
+
 Vue.use(Router)
 
 export default new Router({
@@ -206,6 +208,9 @@ export default new Router({
         }, {
             path: '/article',
             component: article
+        }, {
+            path: '/modifyPwd',
+            component: modifyPwd
         }]
     }, {
         path: '/login',
