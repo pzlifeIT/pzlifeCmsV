@@ -14,10 +14,20 @@
       <el-table-column  prop="group" label="组名称" ></el-table-column>
       <el-table-column  prop="stypeText" label="权限" >
       </el-table-column>
+      <el-table-column  prop="keyword" label="搜索订单关键词" width="500">
+        <template slot-scope="scope">
+          <div class="tags">
+            <el-tag :key="k" v-for="(v,k) in scope.row.keyword" closable :disable-transitions="false" @close="handleClose(v.label_id,k)">{{v.label_name}} </el-tag>
+            <el-input class="input-new-tag" v-show="inpVisible[scope.row.id]" v-model="inpModel[scope.row.id]" 
+            :ref="'input'+scope.row.id" size="small" @keyup.enter.native="bindManagerSearchKeyword(scope.row.id)" @blur="hideInput(scope.row.id)"
+            > </el-input>
+            <el-button v-show="!inpVisible[scope.row.id]" class="button-new-tag" size="small" @click="showInput(scope.row.id)">+ 标签</el-button>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column prop="statusText" label="状态"> 
       </el-table-column>
     </el-table>
-
     <div class="cen-card" v-if="userCard">
       <el-card class="box-card" >
         <div slot="header" class="clearfix">
@@ -59,6 +69,8 @@ export default {
           value:'2',
           label:'超级管理员'
         }],
+      inpVisible:{},
+      inpModel:{},
       userCard:false,
       page:1
     }
@@ -83,6 +95,34 @@ export default {
           that.adminUsers = that.disadminUserList(res.data);
         }
       })
+    },
+    bindManagerSearchKeyword(id) {
+      if(!this.inpModel[id]) return
+      let that =this
+      that.$request({
+        data: {
+          goods_id:that.good_id,
+          label_name:that.inputValue
+        },
+        form:1,
+        url: 'label/addlabeltogoods',
+        success(res){
+          that.inpModel[id] = '';
+          // that.goodslabellist();
+        }
+      })
+    },
+    hideInput(id){
+      if(this.inpModel[id]) return
+      this.inpVisible[id] = false;
+    },
+    showInput(id) {
+      this.inpVisible[id] = true;
+      console.log(id)
+      console.log(this.inpVisible)
+      this.$nextTick(_ => {
+        this.$refs['input'+id].$refs.input.focus();
+      });
     },
     sumbit(name){
       let that= this;
