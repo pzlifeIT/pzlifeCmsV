@@ -260,19 +260,19 @@ a {
 }
 
 .el-select-dropdown {
-    max-width: 500px;
+    max-width: 500px!important;
 }
 
 .el-tag {
-    padding-right: 26px;
+    padding-right: 26px!important;
 }
 
 .tags .el-tag {
-    position: relative;
+    position: relative!important;
 }
 
 .el-tag .el-icon-close {
-    position: absolute;
-    top: 8px;
-    right: 3px;
+    position: absolute!important;
+    top: 8px!important;
+    right: 3px!important;
 }
