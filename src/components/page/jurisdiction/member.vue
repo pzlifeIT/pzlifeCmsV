@@ -10,11 +10,11 @@
 
     <el-table :data="adminUsers" border style="width: 100%">
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column  prop="admin_name" label="用户名" width="150" ></el-table-column>
-      <el-table-column  prop="group" label="组名称" width="150" ></el-table-column>
-      <el-table-column  prop="stypeText" label="权限" width="150" >
+      <el-table-column  prop="admin_name" label="用户名" ></el-table-column>
+      <el-table-column  prop="group" label="组名称"  ></el-table-column>
+      <el-table-column  prop="stypeText" label="权限"  >
       </el-table-column>
-      <el-table-column  prop="keyword" label="搜索订单关键词">
+      <!-- <el-table-column  prop="keyword" label="搜索订单关键词">
         <template slot-scope="scope">
           <div class="tags">
             <el-tag class="el-tag" :key="key" v-for="(key,val) in scope.row.keyword" closable :disable-transitions="false" @close="delKeyWord(val,scope.row.id)">{{val}} </el-tag>
@@ -24,8 +24,8 @@
             <el-button :class="'btn-tag-'+scope.row.id" class="button-new-tag" size="small" @click="showInput(scope.row.id)">+ 关键词</el-button>
           </div>
         </template>
-      </el-table-column>
-      <el-table-column prop="statusText" label="状态" width="150"> 
+      </el-table-column> -->
+      <el-table-column prop="statusText" label="状态" > 
       </el-table-column>
     </el-table>
     <div class="cen-card" v-if="userCard">

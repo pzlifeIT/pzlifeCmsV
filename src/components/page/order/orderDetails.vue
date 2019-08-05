@@ -18,6 +18,7 @@
             <el-form-item label="商票抵扣金额:"><span>{{order_info.deduction_money}}</span></el-form-item>
             <el-form-item label="实际支付:"><span>{{order_info.pay_money}}</span></el-form-item>
             <el-form-item label="商品金额:"><span>{{order_info.goods_money}}</span></el-form-item>
+            <el-form-item label="运费:"><span>{{order_info.express_money}}</span></el-form-item>
             <el-form-item label="优惠金额:"><span>{{order_info.discount_money}}</span></el-form-item>
             <el-form-item label="支付类型:"><span>{{order_info.pay_type_text}}</span></el-form-item>
             <el-form-item label="第三方支付金额:"><span>{{order_info.third_money}}</span></el-form-item>
