@@ -75,6 +75,7 @@ export default {
         data: that.screen,
         url: 'Order/searchKeywordOrders',
         success(res){
+          that.order_list = []
           that.order_list.push({
             all_goods_num:res.all_goods_num,
             all_goods_price:res.all_goods_price,
