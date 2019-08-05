@@ -36,16 +36,20 @@ export default {
   },
   
   mounted(){
-    let t= setInterval(() => {
-      if(this.$glbalData.userInfo.keyword){
-        this.setOption()
-        clearInterval(t)
-      }
-    }, 100);
+    this.getUserInfo()
   },
   methods: {
-    setOption(){
-      let options = this.$glbalData.userInfo.keyword;
+    getUserInfo(){
+      this.$request({
+          url:'admin/getadmininfo',
+          success:res=>{
+              this.$glbalData.userInfo = res.data || {};
+              this.name = res.data.admin_name
+              this.setOption(res.data.keyword)
+          }
+        })
+    },
+    setOption(options){
       let keyword = {
         ref:'keyword',
         label:'订单关键词搜索',

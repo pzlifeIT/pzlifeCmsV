@@ -15,7 +15,7 @@
             <el-table-column  prop="name" label="页面名称" width="120" ></el-table-column>
             <el-table-column label="功能" >
               <template slot-scope="scope">
-                <el-checkbox class="checkbox" v-model="v2.status" v-for="(v2,k2) in scope.row.child" :true-label="1" :false-label="0" :key="k2">{{v2.status}}{{v2.cn_name}}</el-checkbox>
+                <el-checkbox class="checkbox" v-model="v2.status" v-for="(v2,k2) in scope.row.child" :true-label="1" :false-label="0" :key="k2">{{v2.cn_name}}</el-checkbox>
               </template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="100" >
