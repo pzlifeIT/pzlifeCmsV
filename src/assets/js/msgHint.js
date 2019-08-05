@@ -170,7 +170,10 @@ let errCollect = {
             3005: '请先发货',
             3007: '不同用户订单不能使用同一物流公司物流单号发货'
         },
-        getExpressList: {}
+        getExpressList: {},
+        searchKeywordOrders: {
+            3001: '请选择订单关键词'
+        }
     },
     Recommend: {
         updateRecommend: {
@@ -554,6 +557,14 @@ let errCollect = {
         },
         getadmininfo: {
             5001: '账号已停用'
+        },
+        bindManagerSearchKeyword: {
+            3001: '参数错误3001',
+            3002: '请输入关键词'
+        },
+        delManagerSearchKeyword: {
+            3001: '参数错误3001',
+            3002: '参数错误3002'
         }
     },
     category: {

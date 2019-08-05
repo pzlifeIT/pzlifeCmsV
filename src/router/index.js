@@ -27,6 +27,7 @@ const memberList = r => require.ensure([], () => r(require('../components/page/m
 const memberOrder = r => require.ensure([], () => r(require('../components/page/order/memberOrder')), 'memberOrder')
 const orderList = r => require.ensure([], () => r(require('../components/page/order/orderList')), 'orderList')
 const orderDetails = r => require.ensure([], () => r(require('../components/page/order/orderDetails')), 'orderDetails')
+const orderSearch = r => require.ensure([], () => r(require('../components/page/order/orderSearch')), 'orderSearch')
 
 
 const goodsList = r => require.ensure([], () => r(require('../components/page/goods/goodsList')), 'goodsList')
@@ -127,6 +128,9 @@ export default new Router({
         }, {
             path: '/orderList',
             component: orderList
+        }, {
+            path: '/orderSearch',
+            component: orderSearch
         }, {
             path: '/orderList/orderDetails',
             component: orderDetails

@@ -5,27 +5,27 @@
         <el-breadcrumb-item>权限管理</el-breadcrumb-item>
         <el-breadcrumb-item>成员管理</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-button class="add fr" type="primary" icon="el-icon-plus" @click="toggleCard(true)">添加成员</el-button>
+      <el-button class="add fr" type="primary" icon="el-icon-plus" @click="toggleCard(true)">{{inpVisible[2]}}添加成员</el-button>
     </div>
 
     <el-table :data="adminUsers" border style="width: 100%">
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column  prop="admin_name" label="用户名" ></el-table-column>
-      <el-table-column  prop="group" label="组名称" ></el-table-column>
-      <el-table-column  prop="stypeText" label="权限" >
+      <el-table-column  prop="admin_name" label="用户名" width="150" ></el-table-column>
+      <el-table-column  prop="group" label="组名称" width="150" ></el-table-column>
+      <el-table-column  prop="stypeText" label="权限" width="150" >
       </el-table-column>
-      <el-table-column  prop="keyword" label="搜索订单关键词" width="500">
+      <el-table-column  prop="keyword" label="搜索订单关键词">
         <template slot-scope="scope">
           <div class="tags">
-            <el-tag :key="k" v-for="(v,k) in scope.row.keyword" closable :disable-transitions="false" @close="handleClose(v.label_id,k)">{{v.label_name}} </el-tag>
-            <el-input class="input-new-tag" v-show="inpVisible[scope.row.id]" v-model="inpModel[scope.row.id]" 
-            :ref="'input'+scope.row.id" size="small" @keyup.enter.native="bindManagerSearchKeyword(scope.row.id)" @blur="hideInput(scope.row.id)"
+            <el-tag class="el-tag" :key="key" v-for="(key,val) in scope.row.keyword" closable :disable-transitions="false" @close="delKeyWord(val,scope.row.id)">{{val}} </el-tag>
+            <el-input class="input-new-tag " :class="'inp-tag-'+scope.row.id"  v-model="inpModel[scope.row.id]" 
+             size="small" @keyup.enter.native="bindManagerSearchKeyword(scope.row.id,$event)" @blur="hideInput(scope.row.id)"
             > </el-input>
-            <el-button v-show="!inpVisible[scope.row.id]" class="button-new-tag" size="small" @click="showInput(scope.row.id)">+ 标签</el-button>
+            <el-button :class="'btn-tag-'+scope.row.id" class="button-new-tag" size="small" @click="showInput(scope.row.id)">+ 关键词</el-button>
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="statusText" label="状态"> 
+      <el-table-column prop="statusText" label="状态" width="150"> 
       </el-table-column>
     </el-table>
     <div class="cen-card" v-if="userCard">
@@ -96,33 +96,51 @@ export default {
         }
       })
     },
-    bindManagerSearchKeyword(id) {
-      if(!this.inpModel[id]) return
+    bindManagerSearchKeyword(id,ev) {
+      console.log(ev.srcElement.value)
+      if(!ev.srcElement.value) return
       let that =this
       that.$request({
         data: {
-          goods_id:that.good_id,
-          label_name:that.inputValue
+          admin_id:id,
+          keyword:ev.srcElement.value
         },
         form:1,
-        url: 'label/addlabeltogoods',
+        url: 'admin/bindManagerSearchKeyword',
         success(res){
-          that.inpModel[id] = '';
-          // that.goodslabellist();
+          document.querySelector('.inp-tag-'+id).querySelector('input').value= '';
+          that.hideInput(id)
+          that.getAdminUsers();
         }
       })
     },
     hideInput(id){
-      if(this.inpModel[id]) return
-      this.inpVisible[id] = false;
+      console.log(document.querySelector('.inp-tag-'+id))
+      if(document.querySelector('.inp-tag-'+id).querySelector('input').value) return;
+      this.ChangeStyle('.inp-tag-'+id,'none')
+      this.ChangeStyle('.btn-tag-'+id,'inline-block')
     },
     showInput(id) {
-      this.inpVisible[id] = true;
-      console.log(id)
-      console.log(this.inpVisible)
-      this.$nextTick(_ => {
-        this.$refs['input'+id].$refs.input.focus();
-      });
+      this.ChangeStyle('.inp-tag-'+id,'inline-block')
+      this.ChangeStyle('.btn-tag-'+id,'none')
+      document.querySelector('.inp-tag-'+id).querySelector('input').focus()
+    },
+    ChangeStyle(el,con){
+      document.querySelector(el).style.display = con
+    },
+    delKeyWord(val,id){
+      let that =this
+      that.$request({
+        data: {
+          admin_id:id,
+          keyword:val
+        },
+        form:2,
+        url: 'admin/delManagerSearchKeyword',
+        success(res){
+          that.getAdminUsers();
+        }
+      })
     },
     sumbit(name){
       let that= this;
@@ -187,5 +205,15 @@ export default {
 <style scoped>
 .add{
   margin-bottom: 20px;
+}
+.input-new-tag{
+  display: none;
+  width: 120px;
+}
+.tags .el-tag:first-child{
+  margin-left: 0;
+}
+.tags .el-tag{
+  margin-left: 10px;
 }
 </style>
