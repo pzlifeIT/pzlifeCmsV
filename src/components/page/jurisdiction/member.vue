@@ -214,6 +214,28 @@ export default {
   margin-left: 0;
 }
 .tags .el-tag{
+  position: relative;
+  /* display: inline-block; */
+  float: left;
+  margin-top: 3px;
   margin-left: 10px;
+  max-width: 500px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.input-new-tag {
+  /* display: inline-block; */
+  float: left;
+  margin-left: 10px;
+}
+.button-new-tag{
+  /* display: inline-block; */
+  float: left;
+  margin-left: 10px;
+}
+.tags .el-icon-close{
+  position: absolute;
+  left: 0;
 }
 </style>

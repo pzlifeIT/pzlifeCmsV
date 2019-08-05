@@ -258,3 +258,17 @@ a {
 .pagination {
     margin-top: 10px;
 }
+
+.el-select-dropdown {
+    max-width: 500px;
+}
+
+.el-tag {
+    padding-right: 26px;
+}
+
+.el-tag .el-icon-close {
+    position: absolute;
+    top: 8px;
+    right: 3px;
+}
