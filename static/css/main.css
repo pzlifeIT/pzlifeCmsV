@@ -267,6 +267,10 @@ a {
     padding-right: 26px;
 }
 
+.tags .el-tag {
+    position: relative;
+}
+
 .el-tag .el-icon-close {
     position: absolute;
     top: 8px;
