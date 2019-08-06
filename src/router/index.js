@@ -39,6 +39,7 @@ const goodsclassify = r => require.ensure([], () => r(require('../components/pag
 const specifications = r => require.ensure([], () => r(require('../components/page/goods/specifications')), 'specifications')
 const attribute = r => require.ensure([], () => r(require('../components/page/goods/attribute')), 'attribute')
 const subject = r => require.ensure([], () => r(require('../components/page/goods/subject')), 'subject')
+const audioList = r => require.ensure([], () => r(require('../components/page/goods/audioList')), 'audioList')
 
 const bossShare = r => require.ensure([], () => r(require('../components/page/activity/bossShare')), 'bossShare')
 const offline = r => require.ensure([], () => r(require('../components/page/activity/offline')), 'offline')
@@ -164,6 +165,9 @@ export default new Router({
         }, {
             path: '/subject',
             component: subject
+        }, {
+            path: '/audioList',
+            component: audioList
         }, {
             path: '/bossShare',
             component: bossShare

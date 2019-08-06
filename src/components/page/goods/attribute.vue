@@ -20,7 +20,7 @@
       <el-table-column fixed="right" label="操作"  width="350">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="getEditData(scope.row.id)">编辑</el-button>
-        </template>
+        </template> 
       </el-table-column>
     </el-table>
 

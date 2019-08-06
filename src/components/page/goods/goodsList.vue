@@ -11,7 +11,7 @@
     <v-screen :screen="screenQuery" @query="onQuery" ></v-screen>
 
     <el-table :data="goodslist" border style="width: 100%">
-      <el-table-column prop="id" label="ID"></el-table-column>
+      <el-table-column prop="id" label="ID" width="100"></el-table-column>
       <el-table-column  prop="image" label="图片" >
         <template slot-scope="scope">
           <img :src="scope.row.image" width="40"  class="head_pic"/>
@@ -22,6 +22,7 @@
       <el-table-column  prop="supplier" label="前端供应商名称" ></el-table-column>
       <el-table-column  prop="supplier_title" label="后端供应商名称" ></el-table-column>
       <el-table-column  prop="cate" label="分类名称" ></el-table-column>
+      <el-table-column  prop="goods_type_text" label="商品类型" ></el-table-column>
       <el-table-column  prop="target_users_text" label="适用人群" ></el-table-column>
       <el-table-column  prop="status" label="状态" >
         <template slot-scope="scope">
@@ -30,7 +31,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" >
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="gogoodslInfo(scope.row.id)">编辑</el-button>
+          <el-button type="primary" size="small" @click="gogoodslInfo(scope.row.id,scope.row.goods_type)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -51,7 +52,7 @@ export default {
       num:1,
       cardStatus:false,
       ruleForm:{},
-      rules:['goods_name','supplier_id','cate_id','image'],
+      rules:['goods_name','supplier_id','cate_id','image','goods_type'],
       ruleType:{
         'goods_name':{
           type:'input',
@@ -84,6 +85,18 @@ export default {
             emitPath:false
           },
           option:[]
+        },
+        'goods_type':{
+          type:'select',
+          label:'商品类型',
+          placeholder:'请选择商品类型',
+          option:[{
+            value:1,
+            label:'普通商品'
+          },{
+            value:2,
+            label:'虚拟商品'
+          }]
         },
         'target_users':{
           type:'select',
@@ -158,6 +171,10 @@ export default {
         3:'创业店主及以上',
         4:'合伙人及以上',
       },
+      goods_type_json:{
+        1:'普通商品',
+        2:'虚拟商品'
+      },
       goodslist:[],
       total:0
     }
@@ -193,9 +210,10 @@ export default {
         }
       })
     },
-    gogoodslInfo(id){
+    gogoodslInfo(id,type){
       this.$router.push({ path: '/goodsList/goodDetails', query:{
-        id:id
+        id:id,
+        goods_type:type
       } })
     },
     showCard(){
@@ -216,6 +234,19 @@ export default {
         url: 'goods/updowngoods',
         error(){
           that.getgoodslist()
+        }
+      })
+    },
+    sumbit(data){
+      let that =this;
+      that.$request({
+        data: data.ruleForm,
+        url: 'goods/saveaddgoods',
+        form:1,
+        success(res){
+          that.ruleForm = {}
+          that.getgoodslist()
+          that.cardStatus = false
         }
       })
     },
@@ -258,6 +289,7 @@ export default {
         success(res){
           that.goodslist = !res.data? [] : res.data.map(val=>{
             val.target_users_text = that.target_users_json[val.target_users]
+            val.goods_type_text = that.goods_type_json[val.goods_type]
             return val
           })
           console.log(that.goodslist)

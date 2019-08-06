@@ -25,6 +25,9 @@
                 <el-form-item label="三级分类" prop="goods_class" >
                   <p class="chart" >{{goods_data.goods_class}}</p>
                 </el-form-item>
+                <el-form-item label="商品类型" prop="goods_class" >
+                  <p class="chart" >{{goods_data.goods_type==1?'普通商品':'虚拟商品'}}</p>
+                </el-form-item>
                 <el-form-item label="使用人群" prop="goods_class" >
                   <el-select  v-model="goods_data.target_users" placeholder="使用人群">
                     <el-option v-for="item in target_users_list" :key="item.value" :label="item.label" :value="item.value">
@@ -65,21 +68,21 @@
               <v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" :image="images_carousel"></v-upload>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="商品规格" name="fourth">
+        <el-tab-pane v-if="goods_type == 1" label="商品规格" name="fourth">
           <el-button class="primary" type="primary" icon="el-icon-plus" @click="showspCardStatus()">添加规格</el-button>
 
-          <el-table :data="spec_attr" class="table" border>
+          <el-table :data="spec_attr"  class="table" border>
             <el-table-column type="index" label="序号"></el-table-column>
             <el-table-column  prop="spec_name" label="规格" >
             </el-table-column>
             <el-table-column  prop="attr_name" label="属性" ></el-table-column>
             <el-table-column  prop="goods_num" label="操作" >
-              <template slot-scope="scope">
+              <template slot-scope="scope" v-if="goods_type == 1">
                 <el-button type="primary" size="small" @click="delgoodsspec(scope.row.attr_id)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
-
+        
           <el-table :data="sku" class="table" border>
             <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column  prop="attr" label="规格名称" >
@@ -100,6 +103,23 @@
             <el-table-column label="操作" >
               <template slot-scope="scope">
                 <el-button type="primary" size="small" @click="getgoodssku(scope.row.id)">编辑</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane v-else label="音频商品规格" name="audiofourth">
+          <el-button class="primary" type="primary" icon="el-icon-plus" @click="showAudioCardStatus()">添加音频sku</el-button>
+          <el-table :data="sku" class="table" border>
+            <el-table-column prop="id" label="ID"></el-table-column>
+            <el-table-column prop="name" label="sku名称"></el-table-column>
+            <el-table-column prop="audioName" label="音频"></el-table-column>
+            <el-table-column  prop="market_price" label="市场价" ></el-table-column>
+            <el-table-column  prop="retail_price" label="零售价" ></el-table-column>
+            <el-table-column  prop="cost_price" label="成本价" ></el-table-column>
+            <el-table-column  prop="end_time" label="结束时间(按小时记)" ></el-table-column>
+            <el-table-column label="操作" >
+              <template slot-scope="scope">
+                <el-button type="primary" size="small" @click="getGoodsAudioSku(scope.row.id)">编辑</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -141,6 +161,8 @@
     <v-card name='编辑sku' width="100" :cardStatus="skuCardStatus" :ruleType="skuRuleType" :ruleForm="skuRuleForm" :rules="skuRules" @sumbit="skuSumbit" @hideCard="skuHideCard"></v-card>
 
     <v-card name='排序' :cardStatus="imgCardStatus" :ruleType="imgRuleType" :ruleForm="imgRuleForm" :rules="imgRules" @sumbit="imgSumbit" @hideCard="imgHideCard"></v-card>
+
+    <v-card name='音频sku' :cardStatus="audioCardStatus" :ruleType="audioRuleType" :ruleForm="audioRuleForm" :rules="audioRules" @sumbit="audioSumbit" @hideCard="audioHideCard"></v-card>
 
     <div class="cen-card" v-if="imageLook" >
       <el-card class="box-card preview-box" >
@@ -233,6 +255,50 @@ export default {
           label:'规格详情图',
         }
       },
+      audioCardStatus:false,
+      audioRuleForm:{},
+      audioRules:[],
+      audioRuleType:{
+        'name':{
+          type:'input',
+          label:'sku名称',
+          placeholder:'请输入sku名称',
+        },
+        'audio_id_list':{
+          type:'select',
+          label:'音频列表',
+          multiple:true,
+          placeholder:'请选择音频',
+          val:'id',
+          lab:"name",
+          option:[]
+        },
+        'market_price':{
+          type:'number',
+          label:'市场价',
+          placeholder:'请输入市场价',
+        },
+        'retail_price':{
+          type:'number',
+          label:'零售价',
+          placeholder:'请输入零售价',
+        },
+        'cost_price':{
+          type:'number',
+          label:'成本价',
+          placeholder:'请输入成本价',
+        },
+        'integral_price':{
+          type:'number',
+          label:'积分售价',
+          placeholder:'请输入积分售价',
+        },
+        'end_time':{
+          type:'number',
+          label:'结束时间(按小时记)',
+          placeholder:'请输入结束时间(按小时记)',
+        }
+      },
       imgCardStatus:false,
       imgRuleForm:{},
       imgRules:['order_by'],
@@ -310,7 +376,8 @@ export default {
       getAttr:false,
       getFreights:false,
       imageLook:false,
-      image_path:''
+      image_path:'',
+      goods_type:1
     }
   },
   components:{
@@ -319,9 +386,11 @@ export default {
   },
   mounted(){
     this.good_id = this.$route.query.id;
+    this.goods_type = this.$route.query.goods_type;
     this.getOneGoods();
     this.goodslabellist();
     this.getgoodssubject(1);
+    this.getAudioslist();
   },
   methods: {
     showimageLook(){
@@ -476,6 +545,12 @@ export default {
     showspCardStatus(){
       this.spCardStatus = true
     },
+    showAudioCardStatus(){
+      this.audioCardStatus = true
+    },
+    audioHideCard(){
+        this.audioCardStatus = false
+    },
     sHideCard(){
         this.sCardStatus = false
     },
@@ -580,6 +655,37 @@ export default {
         }
       })
     },
+    audioSumbit(data){
+      console.log(data)
+      data.ruleForm.audio_id_list = data.ruleForm.audio_id_list.join(',')
+      data.ruleForm.id?this.saveAudioSku(data.ruleForm): this.addaudiosku(data.ruleForm)
+    },
+    addaudiosku(ruleForm){
+      let that =this 
+      ruleForm.goods_id = this.good_id
+      that.$request({
+        data: ruleForm,
+        form:1,
+        url: 'goods/addaudiosku',
+        success(res){
+          that.audioCardStatus = false
+          that.getOneGoods(4)
+        }
+      })
+    },
+    saveAudioSku(ruleForm){
+      let that =this 
+      ruleForm.sku_id = ruleForm.id
+      that.$request({
+        data: ruleForm,
+        form:3,
+        url: 'goods/saveAudioSku',
+        success(res){
+          that.audioCardStatus = false
+          that.getOneGoods(4)
+        }
+      })
+    },
     getSupplierFreights(){
       let that =this
       that.$request({
@@ -603,6 +709,27 @@ export default {
         success(res){
           that.skuRuleForm = res.data
           that.skuCardStatus = true
+        }
+      })
+    },
+    getGoodsAudioSku(id){
+      let that =this
+      that.$request({
+        data: {
+          goods_id:this.good_id,
+          sku_id:id
+        },
+        url: 'goods/getGoodsAudioSku',
+        success(res){
+          let audio_id_list = [],list = res.sku && res.sku.audioIdList;
+          console.log(res.sku)
+          console.log(res.sku && res.sku.audioIdList)
+          for(let i=0,len=list.length;i<len;i++){
+            audio_id_list.push(list[i].audio_pri_id)
+          }
+          that.audioRuleForm = res.sku;
+          that.audioRuleForm.audio_id_list = audio_id_list;
+          that.audioCardStatus = true;
         }
       })
     },
@@ -655,6 +782,19 @@ export default {
         }
       })
     },
+    getAudioslist(){
+      let that =this
+      that.$request({
+        data: {
+          page:1,
+          page_num:1000
+        },
+        url: 'audios/audioslist',
+        success(res){
+          that.audioRuleType['audio_id_list'].option = res.data || []
+        }
+      })
+    },
     goodslabellist(){
       let that =this
       that.$request({
@@ -672,7 +812,8 @@ export default {
       that.$request({
         data: {
           id:that.good_id,
-          get_type:type
+          get_type:type,
+          goods_type:this.goods_type
         },
         url: 'goods/getOneGoods',
         success(res){
@@ -690,7 +831,19 @@ export default {
             that.images_detatil = that.disimages_detatil(res.images_detatil)
           }
           if(type == 4  || type ==''){
-            that.sku = res.sku
+            let sku = res.sku;
+            if(that.goods_type == 2){
+              for(let i=0,len=sku.length;i<len;i++){
+                let audios = sku[i].audios,nameArr = [];
+                for(let x=0,len1=audios.length;x<len1;x++){
+                  nameArr.push(audios[i].name)
+                }
+                sku[i].audioName = nameArr.join(', ')
+              }
+              that.sku = sku
+            } else{
+              that.sku = sku
+            }
           }
         }
       })

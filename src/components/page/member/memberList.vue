@@ -2,7 +2,7 @@
   <div class="tcontent">
     <div class="table-header clearfix">
       <el-breadcrumb class="breadcrumb"  separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>金融管理</el-breadcrumb-item>
+        <el-breadcrumb-item>会员管理</el-breadcrumb-item>
         <el-breadcrumb-item>会员列表</el-breadcrumb-item>
       </el-breadcrumb>
   </div>
