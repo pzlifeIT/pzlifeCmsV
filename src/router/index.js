@@ -157,7 +157,7 @@ export default new Router({
             path: '/goodsclassify',
             component: goodsclassify
         }, {
-            path: '/specifications',
+            path: '/specification s',
             component: specifications
         }, {
             path: '/specifications/attribute',
