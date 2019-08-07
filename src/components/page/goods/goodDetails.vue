@@ -521,8 +521,10 @@ export default {
     },
     saveupdategoods(){
       let that =this,data = JSON.parse(JSON.stringify(that.goods_data));
-      (that.goods_data_copy.image === data.image)?(
-        data.image = ''):'';
+      that.goods_data_copy.image === data.image?
+        data.image = '':'';
+      that.goods_data_copy.share_image === data.share_image?
+        data.share_image = '':'';
       data.goods_id = data.id;
       that.$request({
         data: data,
