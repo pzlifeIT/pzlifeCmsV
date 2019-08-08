@@ -838,7 +838,7 @@ export default {
               for(let i=0,len=sku.length;i<len;i++){
                 let audios = sku[i].audios,nameArr = [];
                 for(let x=0,len1=audios.length;x<len1;x++){
-                  nameArr.push(audios[i].name)
+                  nameArr.push(audios[x].name)
                 }
                 sku[i].audioName = nameArr.join(', ')
               }
