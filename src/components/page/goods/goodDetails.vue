@@ -658,10 +658,31 @@ export default {
         }
       })
     },
+
     audioSumbit(data){
-      console.log(data)
-      data.ruleForm.audio_id_list = data.ruleForm.audio_id_list.join(',')
-      data.ruleForm.id?this.saveAudioSku(data.ruleForm): this.addaudiosku(data.ruleForm)
+      let ruleForm = data.ruleForm
+      if(parseInt(ruleForm.market_price) <= 0){
+        this.$message({message:'市场价必须大于0',type:'error'})
+        return
+      }
+      if(parseInt(ruleForm.retail_price) <= 0){
+        this.$message({message:'零售价必须大于0',type:'error'})
+        return
+      }
+      if(parseInt(ruleForm.cost_price) <= 0){
+        this.$message({message:'成本价必须大于0',type:'error'})
+        return
+      }
+      if(parseInt(ruleForm.integral_price) <= 0){
+        this.$message({message:'积分售价必须大于0',type:'error'})
+        return
+      }
+      if(parseInt(ruleForm.end_time) <= 0){
+        this.$message({message:'结束时间必须大于0',type:'error'})
+        return
+      }
+      ruleForm.audio_id_list = ruleForm.audio_id_list.join(',')
+      ruleForm.id?this.saveAudioSku(ruleForm): this.addaudiosku(ruleForm)
     },
     addaudiosku(ruleForm){
       let that =this 
@@ -727,8 +748,6 @@ export default {
         url: 'goods/getGoodsAudioSku',
         success(res){
           let audio_id_list = [],list = res.sku && res.sku.audioIdList;
-          console.log(res.sku)
-          console.log(res.sku && res.sku.audioIdList)
           for(let i=0,len=list.length;i<len;i++){
             audio_id_list.push(list[i].audio_pri_id)
           }
