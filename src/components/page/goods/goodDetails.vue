@@ -670,6 +670,7 @@ export default {
         form:1,
         url: 'goods/addaudiosku',
         success(res){
+          that.audioRuleForm = {}
           that.audioCardStatus = false
           that.getOneGoods(4)
         }
