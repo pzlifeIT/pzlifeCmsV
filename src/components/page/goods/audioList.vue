@@ -101,7 +101,7 @@ export default {
     },
     sumbit(data){
       if(data.ruleForm.audition_time <0){
-        that.$message({message:'试听时间不能小于0',type:'error' });
+        this.$message({message:'试听时间不能小于0',type:'error' });
         return
       }
       this.$request({
