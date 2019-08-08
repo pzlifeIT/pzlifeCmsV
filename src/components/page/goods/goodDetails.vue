@@ -684,6 +684,7 @@ export default {
         form:3,
         url: 'goods/saveAudioSku',
         success(res){
+          that.audioRuleForm = {}
           that.audioCardStatus = false
           that.getOneGoods(4)
         }
