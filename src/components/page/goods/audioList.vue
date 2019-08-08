@@ -100,6 +100,10 @@ export default {
       this.cardStatus = false
     },
     sumbit(data){
+      if(data.ruleForm.audition_time <0){
+        that.$message({message:'试听时间不能小于0',type:'error' });
+        return
+      }
       this.$request({
         data: data.ruleForm,
         url: 'audios/editaudio',
