@@ -661,24 +661,24 @@ export default {
 
     audioSumbit(data){
       let ruleForm = data.ruleForm
-      if(parseInt(ruleForm.market_price) <= 0){
-        this.$message({message:'市场价必须大于0',type:'error'})
+      if(parseInt(ruleForm.market_price) < 0){
+        this.$message({message:'市场价必须大于或等于0',type:'error'})
         return
       }
-      if(parseInt(ruleForm.retail_price) <= 0){
-        this.$message({message:'零售价必须大于0',type:'error'})
+      if(parseInt(ruleForm.retail_price) < 0){
+        this.$message({message:'零售价必须大于或等于0',type:'error'})
         return
       }
-      if(parseInt(ruleForm.cost_price) <= 0){
-        this.$message({message:'成本价必须大于0',type:'error'})
+      if(parseInt(ruleForm.cost_price) < 0){
+        this.$message({message:'成本价必须大于或等于0',type:'error'})
         return
       }
-      if(parseInt(ruleForm.integral_price) <= 0){
-        this.$message({message:'积分售价必须大于0',type:'error'})
+      if(parseInt(ruleForm.integral_price) < 0){
+        this.$message({message:'积分售价必须大于或等于0',type:'error'})
         return
       }
-      if(parseInt(ruleForm.end_time) <= 0){
-        this.$message({message:'结束时间必须大于0',type:'error'})
+      if(parseInt(ruleForm.end_time) < 0){
+        this.$message({message:'结束时间必须大于或等于0',type:'error'})
         return
       }
       ruleForm.audio_id_list = ruleForm.audio_id_list.join(',')
