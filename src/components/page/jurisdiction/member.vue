@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column  prop="keyword" label="搜索订单关键词">
         <template slot-scope="scope">
-          <div class="tags">
+          <div class="tags member-tags">
             <el-tag class="el-tag" :key="key" v-for="(key,val) in scope.row.keyword" closable :disable-transitions="false" @close="delKeyWord(val,scope.row.id)">{{val}} </el-tag>
             <el-input class="input-new-tag " :class="'inp-tag-'+scope.row.id"  v-model="inpModel[scope.row.id]" 
              size="small" @keyup.enter.native="bindManagerSearchKeyword(scope.row.id,$event)" @blur="hideInput(scope.row.id)"

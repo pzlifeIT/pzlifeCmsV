@@ -268,6 +268,7 @@ export default {
           type:'select',
           label:'音频列表',
           multiple:true,
+          filterable:true,
           placeholder:'请选择音频',
           val:'id',
           lab:"name",

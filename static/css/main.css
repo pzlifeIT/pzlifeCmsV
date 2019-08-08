@@ -263,15 +263,15 @@ a {
     max-width: 500px!important;
 }
 
-.el-tag {
+.member-tags .el-tag {
     padding-right: 26px!important;
 }
 
-.tags .el-tag {
+.member-tags .tags .el-tag {
     position: relative!important;
 }
 
-.el-tag .el-icon-close {
+.member-tags .el-tag .el-icon-close {
     position: absolute!important;
     top: 8px!important;
     right: 3px!important;
