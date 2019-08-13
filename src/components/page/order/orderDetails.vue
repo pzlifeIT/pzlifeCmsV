@@ -57,11 +57,10 @@
                   <el-form label-width="80px" :model="v.express" :ref="'menu'+v.id" >
                     <el-form-item  label="快递公司" prop="express_key" :rules="[{ required: true, message: '快递公司不能为空', trigger: 'change' }]">
                       <el-select class="" v-model="v.express.express_key" placeholder="请选择快递公司">
-                      <el-option v-for="item in options" :key="item.id" :label="item.type_name" :value="item.id">
+                      <el-option v-for="(val,key) of options" :key="val" :label="val" :value="key">
                       </el-option>
                     </el-select>
                     </el-form-item>
-
                     <el-form-item  label="快递单号" prop="express_no" :rules="[{ required: true, message: '快递单号不能为空', trigger: 'blur' }]">
                       <el-input v-model="v.express.express_no" placeholder="请输入快递单号"></el-input>
                     </el-form-item>
@@ -85,25 +84,7 @@ export default {
   data(){
     return {
       order_id:'',
-      options:[
-          { id: 'shunfeng', type_name: '顺丰速运' },
-          { id: 'zhongtong', type_name: '中通快递' },
-          { id: 'shentong', type_name: '申通快递' },
-          { id: 'yunda', type_name: '韵达快递' },
-          { id: 'tiantian', type_name: '天天快递' },
-          { id: 'huitongkuaidi', type_name: '百世快递' },
-          { id: 'ems', type_name: 'EMS' },
-          { id: 'youshuwuliu', type_name: '优速物流' },
-          { id: 'kuayue', type_name: '跨越速运' },
-          { id: 'debangwuliu', type_name: '德邦物流' },
-          { id: 'yuantong', type_name: '圆通速递' },
-          { id: 'zhaijibian', type_name: '黑猫宅急便(宅急便)' },
-          { id: 'ane66', type_name: '安能快递' },
-          { id: 'youzhengguonei', type_name: '中国邮政' },
-          { id: 'rufengda', type_name: '如风达' },
-          { id: 'wanxiangwuliu', type_name: '万象物流' },
-          { id: 'SJPS', type_name: '商家派送' }
-      ],
+      options:{},
       no_deliver_goods:[],
       no_deliver_goods_num:0,
       logistics:[],
@@ -117,6 +98,7 @@ export default {
   mounted(){
     this.order_id = this.$route.query.id;
     this.getOrderInfo();
+    this.getExpressList()
   },
   methods: {
     sumbit(id,key,express_no,bl){
@@ -143,6 +125,15 @@ export default {
         success(res){
           that.$message({message:'发货成功',type:'success' });
           that.getOrderInfo()
+        }
+      })
+    },
+    getExpressList(){
+      let that =this
+      that.$request({
+        url: 'Order/getExpressList',
+        success(res){
+          that.options = res.ExpressList
         }
       })
     },
