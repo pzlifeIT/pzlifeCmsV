@@ -40,6 +40,7 @@ const specifications = r => require.ensure([], () => r(require('../components/pa
 const attribute = r => require.ensure([], () => r(require('../components/page/goods/attribute')), 'attribute')
 const subject = r => require.ensure([], () => r(require('../components/page/goods/subject')), 'subject')
 const audioList = r => require.ensure([], () => r(require('../components/page/goods/audioList')), 'audioList')
+const tabble = r => require.ensure([], () => r(require('../components/page/goods/tabble')), 'tabble')
 
 const bossShare = r => require.ensure([], () => r(require('../components/page/activity/bossShare')), 'bossShare')
 const offline = r => require.ensure([], () => r(require('../components/page/activity/offline')), 'offline')
@@ -169,6 +170,9 @@ export default new Router({
             path: '/audioList',
             component: audioList
         }, {
+          path: '/tabble',
+          component: tabble
+      }, {
             path: '/bossShare',
             component: bossShare
         }, {

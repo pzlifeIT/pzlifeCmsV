@@ -34,6 +34,12 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
+                <el-form-item label="表格模板" prop="goods_class" >
+                  <el-select  v-model="goods_data.goods_sheet" placeholder="请选择表格模板">
+                    <el-option v-for="item in tabbleList" :key="item.id" :label="item.name" :value="item.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="产品标题图" prop="image" >
                   <v-upload @upresult='upresult' num='image' :image="goods_data.image"></v-upload>
                 </el-form-item>
@@ -374,6 +380,7 @@ export default {
         value:4,
         label:'合伙人及以上'
       }],
+      tabbleList:[],
       getAttr:false,
       getFreights:false,
       imageLook:false,
@@ -392,8 +399,19 @@ export default {
     this.goodslabellist();
     this.getgoodssubject(1);
     this.getAudioslist();
+    this.getSheet()
   },
   methods: {
+    getSheet(){
+      let that =this;
+      that.$request({
+        data:{pageNum:1000},
+        url: 'goods/getSheet',
+        success(res){
+          that.tabbleList = res.sheetlist || []
+        }
+      })
+    },
     showimageLook(){
       this.imageLook = true
       console.log(22222)
@@ -843,6 +861,8 @@ export default {
         success(res){
           if(type == 1  || type ==''){
             that.goods_data = res.goods_data
+            let goods_sheet = that.goods_data.goods_sheet;
+            that.goods_data.goods_sheet = goods_sheet ? goods_sheet : ''
             that.goods_data_copy = JSON.parse(JSON.stringify(res.goods_data))
             !that.getAttr && that.getspecattr()
             !that.getFreights && that.getSupplierFreights()
