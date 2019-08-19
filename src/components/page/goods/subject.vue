@@ -15,6 +15,11 @@
           <img :src="scope.row.subject_image" width="40"  class="head_pic"/>
         </template>
       </el-table-column>
+      <el-table-column  prop="subject_share_image" label="分享图片图片" >
+        <template slot-scope="scope">
+          <img :src="scope.row.subject_share_image" width="40"  class="head_pic"/>
+        </template>
+      </el-table-column>
       <el-table-column  prop="pid"  label="父级分类" width="80"></el-table-column>
       <el-table-column  prop="subject"  label="专题名称" ></el-table-column>
       <el-table-column  prop="order_by"  label="排序" ></el-table-column>
@@ -85,7 +90,12 @@ export default {
           type:'image',
           label:'图片',
           placeholder:'请上传图片'
-        }
+        },
+        'share_image':{
+          type:'image',
+          label:'分享图片',
+          placeholder:'请上传分享图片'
+        },
       },
       subjectList:[]
     }
@@ -119,15 +129,6 @@ export default {
         },
         form:3,
         url: 'subject/editsubject',
-        success(){
-
-        },
-        error(){
-          that.getallsubject()
-        },
-        failed(){
-          that.getallsubject()
-        }
       })
     },
     addsubject(data){
@@ -167,6 +168,7 @@ export default {
         success(res){
           res.data = res.data || {}
           res.data.image = res.data.subject_image
+          res.data.share_image = res.data.subject_share_image
           that.ruleForm = res.data
           that.ruleType['pid'].hdplay = true
           that.ruleType['order_by'].hdplay = false
