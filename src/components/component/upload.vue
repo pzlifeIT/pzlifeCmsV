@@ -1,17 +1,18 @@
 <template>
     <div class="" :id='num'>
-        <div v-if="imaegList.length > 0" class="imgList">
-          <div v-for="(v,k) in imaegList" :key="k" class="imgli">
-            <span v-if="multiple" class="imgDel" @click="delImg(v[name] || v['image'])">X</span>
-            <img  :src="v[name] || v['image']" @click="fileShow" class="avatar">
-          </div>
+      <div v-if="imaegList.length > 0" class="imgList">
+        <div v-for="(v,k) in imaegList" :key="k" class="imgli">
+          <span v-if="multiple" class="imgDel" @click="delImg(v[name] || v['image'])">X</span>
+          <img  :src="v[name] || v['image']" @click="fileShow" class="avatar">
+          <input v-if="multiple" class="orderby" type="text" @keyup.enter="orderby(v[name] || v['image'],$event)" :value="v.order_by">
         </div>
+      </div>
 
-        <i v-if="imaegList.length === 0 && !multiple" class="el-icon-plus avatar-uploader-icon"  @click="fileShow"></i>
-        <i v-if="multiple" class="el-icon-plus avatar-uploader-icon"  @click="fileShow"></i>
+      <i v-if="imaegList.length === 0 && !multiple" class="el-icon-plus avatar-uploader-icon"  @click="fileShow"></i>
+      <i v-if="multiple" class="el-icon-plus avatar-uploader-icon"  @click="fileShow"></i>
 
-        <input class="hide" type="file" :multiple="multiple"  @change="fileChange" name="" :id="'fileinp'+num">
-    </div>
+      <input class="hide" type="file" :multiple="multiple"  @change="fileChange" name="" :id="'fileinp'+num">
+  </div>
 </template>
 
 <script>
@@ -39,6 +40,13 @@ export default {
     delImg(path){
       this.$emit('delImg',{
         path: path,
+        num:this.num
+      })
+    },
+    orderby(path,ev){
+      this.$emit('orderby',{
+        path: path,
+        order_by:ev.target.value,
         num:this.num
       })
     },
@@ -170,6 +178,12 @@ export default {
 }
 .add{
   margin-bottom: 20px;
+}
+.orderby{
+  width: 60px;
+  line-height: 20px;
+  text-align: center;
+  /* border: 1px solid #999; */
 }
 </style>
 

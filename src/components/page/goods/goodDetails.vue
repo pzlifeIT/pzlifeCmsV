@@ -65,7 +65,7 @@
         <el-tab-pane label="商品轮播图" name="third">
           <div class="banner">
             <span class="imageTit">商品轮播图:</span>
-              <v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" :image="images_carousel"></v-upload>
+              <v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" @orderby="orderby" :image="images_carousel"></v-upload>
           </div>
         </el-tab-pane>
         <el-tab-pane v-if="goods_type == 1" label="商品规格" name="fourth">
@@ -524,6 +524,20 @@ export default {
         },
         form:2,
         url: 'goods/delgoodsimage',
+        success(res){
+          that.getOneGoods(3)
+        },
+      })
+    },
+    orderby(param){
+      let that =this
+      that.$request({
+        data: {
+          image_path:param.path,
+          order_by:param.order_by
+        },
+        form:3,
+        url: 'goods/sortimagedetail',
         success(res){
           that.getOneGoods(3)
         },
@@ -1047,5 +1061,56 @@ export default {
 }
 .preview-box{
   width:700px;
+}
+
+.el-icon-plus {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+}
+.el-icon-plus:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+.avatar {
+  width: auto;
+  min-width: 60px;
+  height: 60px;
+  display: block;
+  cursor: pointer;
+}
+.imgList{
+
+}
+.imgli{
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+  float: left;
+}
+.imgDel{
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-right: 0;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
+.add{
+  margin-bottom: 20px;
 }
 </style>
