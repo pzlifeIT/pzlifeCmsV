@@ -116,6 +116,18 @@ export default {
             label:'合伙人及以上'
           }]
         },
+        'giving_rights':{
+          type:'select',
+          label:'商品赠送权益',
+          placeholder:'请选择商品赠送权益',
+          option:[{
+            value:1,
+            label:'不赠送'
+          },{
+            value:2,
+            label:'钻石'
+          }]
+        },
         'image':{
           type:'image',
           label:'产品标题图',

@@ -34,6 +34,12 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
+                <el-form-item label="商品赠送权益" prop="giving_rights" >
+                  <el-select  v-model="goods_data.giving_rights" placeholder="商品赠送权益">
+                    <el-option v-for="item in giving_rights_list" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="产品标题图" prop="image" >
                   <v-upload @upresult='upresult' num='image' :image="goods_data.image"></v-upload>
                 </el-form-item>
@@ -373,6 +379,13 @@ export default {
       },{
         value:4,
         label:'合伙人及以上'
+      }],
+      giving_rights_list:[{
+        value:1,
+        label:'不赠送'
+      },{
+        value:2,
+        label:'钻石'
       }],
       getAttr:false,
       getFreights:false,
