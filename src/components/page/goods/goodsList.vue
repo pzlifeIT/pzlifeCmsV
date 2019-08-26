@@ -98,6 +98,14 @@ export default {
             label:'虚拟商品'
           }]
         },
+        'sheet_id':{
+          type:'select',
+          label:'表格模板',
+          placeholder:'请选择表格模板',
+          val:'id',
+          lab:'name',
+          option:[]
+        },
         'target_users':{
           type:'select',
           label:'适用人群',
@@ -202,6 +210,7 @@ export default {
     this.getgoodslist()
     this.getAllSuppliers()
     this.getAllCateList()
+    this.getSheet()
   },
   methods: {
     getAllSuppliers(){
@@ -219,6 +228,16 @@ export default {
         url: 'category/allCateList',
         success(res){
           that.ruleType['cate_id'].option = res.data || []
+        }
+      })
+    },
+    getSheet(){
+      let that =this;
+      that.$request({
+        data:{pageNum:1000},
+        url: 'goods/getSheet',
+        success(res){
+          that.ruleType['sheet_id'].option = res.sheetlist || []
         }
       })
     },
@@ -304,7 +323,6 @@ export default {
             val.goods_type_text = that.goods_type_json[val.goods_type]
             return val
           })
-          console.log(that.goodslist)
           that.total = res.total || 0;
         }
       })
