@@ -98,14 +98,14 @@ export default {
             label:'虚拟商品'
           }]
         },
-        'sheet_id':{
-          type:'select',
-          label:'表格模板',
-          placeholder:'请选择表格模板',
-          val:'id',
-          lab:'name',
-          option:[]
-        },
+        // 'sheet_id':{
+        //   type:'select',
+        //   label:'表格模板',
+        //   placeholder:'请选择表格模板',
+        //   val:'id',
+        //   lab:'name',
+        //   option:[]
+        // },
         'target_users':{
           type:'select',
           label:'适用人群',
@@ -210,7 +210,7 @@ export default {
     this.getgoodslist()
     this.getAllSuppliers()
     this.getAllCateList()
-    this.getSheet()
+    // this.getSheet()
   },
   methods: {
     getAllSuppliers(){
