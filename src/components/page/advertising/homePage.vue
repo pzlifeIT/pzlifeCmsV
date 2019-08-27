@@ -191,6 +191,7 @@ export default {
       data.model_id = this.model;
       data.tier = 2
       data.parent_id = this.pid
+      if(data.show_type === 2) data.show_data = data.jump_content
       that.$request({
         data:data,
         url: 'Recommend/addRecommend',
