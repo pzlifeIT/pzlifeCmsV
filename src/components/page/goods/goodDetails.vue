@@ -412,7 +412,7 @@ export default {
     this.goodslabellist();
     this.getgoodssubject(1);
     this.getAudioslist();
-    // this.getSheet()
+    this.getSheet()
   },
   methods: {
     getSheet(){
