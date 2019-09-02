@@ -34,12 +34,12 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
-                <!-- <el-form-item label="表格模板" prop="goods_class" >
+                <el-form-item label="表格模板" prop="goods_class" >
                   <el-select  v-model="goods_data.goods_sheet" placeholder="请选择表格模板">
                     <el-option v-for="item in tabbleList" :key="item.id" :label="item.name" :value="item.id">
                       </el-option>
                     </el-select>
-                </el-form-item> -->
+                </el-form-item>
                 <el-form-item label="商品赠送权益" prop="giving_rights" >
                   <el-select  v-model="goods_data.giving_rights" placeholder="商品赠送权益">
                     <el-option v-for="item in giving_rights_list" :key="item.value" :label="item.label" :value="item.value">
