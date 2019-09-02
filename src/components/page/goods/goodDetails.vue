@@ -421,6 +421,7 @@ export default {
         data:{pageNum:1000},
         url: 'goods/getSheet',
         success(res){
+          res.sheetlist.unshift({id:'', name:'不选择'})
           that.tabbleList = res.sheetlist || []
         }
       })

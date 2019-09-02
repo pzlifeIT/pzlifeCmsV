@@ -29,13 +29,13 @@
         <el-tab-pane label="商品清单" name="second">
           <el-table :data="order_pack" class="table" border>
             <el-table-column type="index" label="序号"></el-table-column>
-            <el-table-column  prop="goods_name" label="商品名称" >
-            </el-table-column>
+            <el-table-column  prop="goods_name" label="商品名称" ></el-table-column>
             <el-table-column  prop="sku_json" label="商品规格" ></el-table-column>
             <el-table-column  prop="goods_price" label="商品价格" ></el-table-column>
             <el-table-column  prop="goods_num" label="购买数量" ></el-table-column>
             <el-table-column  prop="integral" label="赠送积分" ></el-table-column>
             <el-table-column  prop="margin_price" label="利润" ></el-table-column>
+            <el-table-column  prop="table" label="查看表单" ></el-table-column>
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="邮寄信息" name="third">
