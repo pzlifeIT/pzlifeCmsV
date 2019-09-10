@@ -768,7 +768,7 @@ let errCollect = {
     asyncaudios: {},
     audioslist: {}
   },
-  label: {
+  label: { 
     labeldel: {},
     goodslabellist: {},
     searchlabel: {},
