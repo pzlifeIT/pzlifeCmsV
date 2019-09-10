@@ -80,7 +80,6 @@
           </el-tab-pane>
           <!--v-if="fromlist.length > 0"-->
           <el-tab-pane label="查看表单" name="fifth">
-            123
               <v-card name='表格' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
           </el-tab-pane>
         </el-tabs>
