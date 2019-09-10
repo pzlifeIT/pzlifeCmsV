@@ -94,7 +94,7 @@
               </template>
             </el-table-column>
           </el-table>
-        
+
           <el-table :data="sku" class="table" border>
             <el-table-column prop="id" label="ID"></el-table-column>
             <el-table-column  prop="attr" label="规格名称" >
@@ -648,6 +648,7 @@ export default {
       that.goods_data_copy.share_image === data.share_image?
         data.share_image = '':'';
       data.goods_id = data.id;
+      data.sheet_id = data.goods_sheet
       that.$request({
         data: data,
         form:3,
@@ -691,9 +692,9 @@ export default {
       })
     },
     skuSumbit(data){
-      let that =this 
+      let that =this
       console.log(data)
-      data.ruleForm.sku_id = data.ruleForm.id 
+      data.ruleForm.sku_id = data.ruleForm.id
       that.$request({
         data: data.ruleForm,
         form:3,
@@ -731,7 +732,7 @@ export default {
       ruleForm.id?this.saveAudioSku(ruleForm): this.addaudiosku(ruleForm)
     },
     addaudiosku(ruleForm){
-      let that =this 
+      let that =this
       ruleForm.goods_id = this.good_id
       that.$request({
         data: ruleForm,
@@ -745,7 +746,7 @@ export default {
       })
     },
     saveAudioSku(ruleForm){
-      let that =this 
+      let that =this
       ruleForm.sku_id = ruleForm.id
       that.$request({
         data: ruleForm,
@@ -832,7 +833,7 @@ export default {
         url: 'subject/getgoodssubject',
         success(res){
           type == 1 ? (that.goodssubject = res.data):(
-            (that.sRuleType['subject_id'].option = res.data) && 
+            (that.sRuleType['subject_id'].option = res.data) &&
             (that.sCardStatus = true)
           )
         }

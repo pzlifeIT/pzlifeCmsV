@@ -173,6 +173,10 @@ let errCollect = {
     getExpressList: {},
     searchKeywordOrders: {
       3001: '请选择订单关键词'
+    },
+    getOrderSheet: {
+      3000: '未获取到数据',
+      3001: '未收到订单号'
     }
   },
   Recommend: {
