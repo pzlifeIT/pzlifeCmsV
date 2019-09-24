@@ -80,7 +80,46 @@
           </el-tab-pane>
           <!--v-if="fromlist.length > 0"-->
           <el-tab-pane label="查看表单" name="fifth">
-              <v-card name='表格' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
+            <!--<div class="demo-input-suffix lable" v-for="v,k in from">-->
+            <!--{{v.title}}-->
+            <!--<el-input v-model="v.value"></el-input>-->
+            <!--</div>-->
+            <!--<div class="box-card">-->
+              <!--<el-form label-width="110px" v-for="v,k in text" label-position="right">-->
+                <!--<el-form-item :label="v.title" prop="goods_name">-->
+                  <!--<el-input v-model="v.value" placeholder=""></el-input>-->
+                <!--</el-form-item>-->
+                <!--<el-form label-width="110px" v-for="v,k in radio" label-position="right">-->
+                  <!--<el-form-item :label="v.title" wx prop="goods_class">-->
+                    <!--<el-select v-model="goods_data.goods_sheet" :placeholder="v.title">-->
+                      <!--<el-option>是</el-option>-->
+                      <!--<el-option>否</el-option>-->
+                    <!--</el-select>-->
+                  <!--</el-form-item>-->
+                <!--</el-form>-->
+                <!--<el-form label-width="110px" v-for="v,k in imgs" label-position="right">-->
+                  <!--<el-form-item :label="v.title" wx prop="goods_class">-->
+                    <!--<div class="banner">-->
+                      <!--&lt;!&ndash;<v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" @orderby="orderby" :image="images_carousel"></v-upload>&ndash;&gt;-->
+                      <!--<img class="imgs" :src="v.value" alt="">-->
+                    <!--</div>-->
+                  <!--</el-form-item>-->
+                <!--</el-form>-->
+                <!--<el-form label-width="110px" v-for="v,k in img" label-position="right">-->
+                  <!--<el-form-item :label="v.title" prop="image">-->
+                    <!--&lt;!&ndash;<v-upload @upresult='upresult' num='image' image="v.value"></v-upload>&ndash;&gt;-->
+                    <!--<img class="imgs" :src="v.value" alt="">-->
+                  <!--</el-form-item>-->
+                <!--</el-form>-->
+                <!--&lt;!&ndash;<el-form-item label="商品分享标题图" prop="share_image" >&ndash;&gt;-->
+                <!--&lt;!&ndash;<v-upload @upresult='shareUpresult' num='share_image' image="goods_data.share_image"></v-upload>&ndash;&gt;-->
+                <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+                <!--&lt;!&ndash;<el-form-item class="flex-cen">&ndash;&gt;-->
+                <!--&lt;!&ndash;<el-button  type="primary" @click="gSumbit('goods_data')">确定</el-button>&ndash;&gt;-->
+                <!--&lt;!&ndash;<el-button  @click="reduction()">取消</el-button>&ndash;&gt;-->
+                <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+              <!--</el-form>-->
+            <!--</div>-->
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -106,16 +145,26 @@
         ruleType: {},
         ruleForm: {},
         rules: [],
-        fromlist: []
+        fromlist: [],
+        airPlan: [],
+        arr: [],
+        imgs: [],
+        from: [],
+        img: [],
+        text: [],
+        radio: []
       }
     },
     components: {
       vCard
     },
-    mounted() {
+    created() {
       this.order_id = this.$route.query.id;
       this.getOrderInfo();
       this.getExpressList()
+    },
+    mounted() {
+
 
     },
     methods: {
@@ -136,6 +185,56 @@
           url: 'order/getOrderSheet',
           success(res) {
             that.fromlist = res.fromList
+            let list = res.fromList
+            let ruleType = {}
+            console.log(list)
+            let json = {
+              type: '',
+              lable: '',
+              value: ''
+            }
+            let img = []
+            let airPlan = []
+            let arr = []
+            let imgs = []
+            let text = []
+            let radio = []
+            for (let i = 0; i < list.length; i++) {
+              //组合数据
+              for (let j = 0; j < list[i].from.length; j++) {
+                switch (parseInt(list[i].from[j].type)) {
+                  case 1:
+                  case 2:
+
+                  case 5:
+                    text.push(list[i].from[j])
+                    break;
+                  case 3:
+                    radio.push(list[i].from[j])
+                    break
+                  case 4:
+                    airPlan.push(list[i].from[j])
+                    break;
+                  case 6:
+                    // let key1 = list[i].from[j].name
+                    // img[key1] = list[i].from[j].value
+                    img.push(list[i].from[j])
+                    break;
+                  case 7:
+                    imgs.push(list[i].from[j])
+                    break;
+                }
+              }
+              that.from = list[i].from
+            }
+            that.ruleType = ruleType
+            that.airPlan = airPlan
+            that.arr = arr
+            that.imgs = imgs
+            that.img = img
+            that.text = text
+            that.radio = radio
+            console.log(this.from)
           }
         })
       },
@@ -300,6 +399,12 @@
     margin: 0 auto 20px;
   }
 
+  .box-card {
+    margin-top: 20px;
+    width: 500px;
+    margin-left: 20px;;
+  }
+
   .form span {
     font-size: 18px;
     color: #404040;
@@ -332,5 +437,15 @@
 
   .box-card .header {
     font-size: 15px;
+  }
+
+  .lable {
+    width: 50%;
+    margin: 10px auto;
+  }
+
+  .imgs {
+    width: 150px;
+    height: 150px;
   }
 </style>
