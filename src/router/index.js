@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
 const Home = r => require.ensure([], () => r(require('../components/common/Home')), 'Home')
 const index = r => require.ensure([], () => r(require('../components/page/index')), 'index')
 
@@ -28,7 +33,7 @@ const memberOrder = r => require.ensure([], () => r(require('../components/page/
 const orderList = r => require.ensure([], () => r(require('../components/page/order/orderList')), 'orderList')
 const orderDetails = r => require.ensure([], () => r(require('../components/page/order/orderDetails')), 'orderDetails')
 const orderSearch = r => require.ensure([], () => r(require('../components/page/order/orderSearch')), 'orderSearch')
-
+const orderExport = r => require.ensure([], () => r(require('../components/page/order/orderExport')),'orderExport')
 
 const goodsList = r => require.ensure([], () => r(require('../components/page/goods/goodsList')), 'goodsList')
 const goodDetails = r => require.ensure([], () => r(require('../components/page/goods/goodDetails')), 'goodDetails')
@@ -134,6 +139,10 @@ export default new Router({
             path: '/orderSearch',
             component: orderSearch
         }, {
+            path:'/orderExport',
+            component:orderExport
+        },
+        {
             path: '/orderList/orderDetails',
             component: orderDetails
         }, {

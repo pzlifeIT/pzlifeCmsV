@@ -37,7 +37,9 @@ export default {
   },
   methods: {
     onQuery(){
-      let data = this.screen,len=data.length,param = {};
+      let data = this.screen,
+      len=data.length,
+      param = {};
       for(let i=0;i<len;i++){
         param[data[i].ref] = data[i].content
       }

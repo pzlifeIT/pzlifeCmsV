@@ -177,6 +177,10 @@ let errCollect = {
     getOrderSheet: {
       3000: '未获取到数据',
       3001: '未收到订单号'
+    },
+    exportDeliveryOrder: {
+      3001:'空的keyword',
+      3000:'未查询到数据'
     }
   },
   Recommend: {
