@@ -121,6 +121,25 @@ export default {
           type: "input",
           content: 1000,
           placeholder: "默认一千条"
+        },
+        {
+          ref:'nick_name',
+          label:'昵称',
+          type:'input',
+          content:'',
+          placeholder:'要查询的昵称'
+        },
+        {
+          ref:'start_time',
+          label:"订单创建时间（开始）",
+          type:'date',
+          content:''
+        },
+        {
+          ref:'end_time',
+          label:'订单创建时间（结束）',
+          type:'date',
+          content:''
         }
       ],
       order_list: []
