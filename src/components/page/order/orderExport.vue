@@ -167,7 +167,7 @@ export default {
     let orderData = this.orderData;
     console.log(orderData)
   
-    let str = '订单号，收货人姓名，收货人电话，收货地址，备注，供应商id，供应商名称，商品名称，购买数量，sku\n'
+    let str = '订单号,收货人姓名,收货人电话,收货地址,备注,供应商id,供应商名称,商品名称,购买数量,sku\n'
     for(let i = 0 ; i < orderData.length ; i++ ){
         for(let item in orderData[i]){
             str+=`${orderData[i][item] + '\t'},`;     
