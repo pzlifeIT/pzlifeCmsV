@@ -29,10 +29,14 @@ export default {
       screenQuery: [
         {
           ref: "sup_id",
-          label: "供应商id",
-          type: "input",
+          label: "供应商",
+          type: "select",
           content: "",
-          placeholder: "请输入供应商id"
+          placeholder: '请选择供应商',
+          filterable: true,
+          val: 'id',
+          lab: 'name',
+          option: []
         },
         {
           ref: "order_status",
@@ -121,25 +125,6 @@ export default {
           type: "input",
           content: 1000,
           placeholder: "默认一千条"
-        },
-        {
-          ref:'nick_name',
-          label:'昵称',
-          type:'input',
-          content:'',
-          placeholder:'要查询的昵称'
-        },
-        {
-          ref:'start_time',
-          label:"订单创建时间（开始）",
-          type:'date',
-          content:''
-        },
-        {
-          ref:'end_time',
-          label:'订单创建时间（结束）',
-          type:'date',
-          content:''
         }
       ],
       order_list: []
@@ -151,6 +136,7 @@ export default {
 
   mounted() {
     this.getUserInfo();
+    this.getAllSuppliers()
   },
   methods: {
     getUserInfo() {
@@ -163,7 +149,29 @@ export default {
         }
       });
     },
-
+    getAllSuppliers() {
+        let that = this;
+        that.$request({
+          url: 'suppliers/getsuppliersall',
+          success(res) {
+            let option = that.disData(res.data)
+            that.screenQuery[0].option = option
+          }
+        })
+      },
+      disData(data) {
+        let arr = []
+        for (let i = 0; i < data.length; i++) {
+          let value = data[i].id
+          let label = data[i].name
+          let json = {
+            value:value,
+            label:label
+          }
+          arr.push(json)
+        }
+        return arr
+      },
     onQuery(screen) {
       console.log(screen);
       this.screen = screen;
