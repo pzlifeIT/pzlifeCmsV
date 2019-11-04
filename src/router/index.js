@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)
+  return routerPush.call(this, location)
 }
 
 const Home = r => require.ensure([], () => r(require('../components/common/Home')), 'Home')
@@ -33,7 +33,7 @@ const memberOrder = r => require.ensure([], () => r(require('../components/page/
 const orderList = r => require.ensure([], () => r(require('../components/page/order/orderList')), 'orderList')
 const orderDetails = r => require.ensure([], () => r(require('../components/page/order/orderDetails')), 'orderDetails')
 const orderSearch = r => require.ensure([], () => r(require('../components/page/order/orderSearch')), 'orderSearch')
-const orderExport = r => require.ensure([], () => r(require('../components/page/order/orderExport')),'orderExport')
+const orderExport = r => require.ensure([], () => r(require('../components/page/order/orderExport')), 'orderExport')
 
 const goodsList = r => require.ensure([], () => r(require('../components/page/goods/goodsList')), 'goodsList')
 const goodDetails = r => require.ensure([], () => r(require('../components/page/goods/goodDetails')), 'goodDetails')
@@ -73,168 +73,171 @@ const modifyPwd = r => require.ensure([], () => r(require('../components/page/ju
 Vue.use(Router)
 
 export default new Router({
-    // mode: 'history',
-    base: '/',
-    routes: [{
-        path: '/',
-        component: Home,
-        children: [{
-            path: '',
-            component: index
-        }, {
-            path: '/index',
-            component: index
-        }, {
-            path: '/member',
-            component: member
-        }, {
-            path: '/group',
-            component: group,
-        }, {
-            path: '/group/permissions',
-            component: permissions
-        }, {
-            path: '/group/peoplemanagement',
-            component: peoplemanagement
-        }, {
-            path: '/jurisdictionList',
-            component: jurisdictionList
-        }, {
-            path: '/recharge',
-            component: recharge
-        }, {
-            path: '/becomeBoss',
-            component: becomeBoss
-        }, {
-            path: '/upgradeBoss',
-            component: upgradeBoss
-        }, {
-            path: '/cardbag',
-            component: cardbag
-        }, {
-            path: '/withdraw',
-            component: withdraw
-        }, {
-            path: '/bounty',
-            component: bounty
-        }, {
-            path: '/addbankcard',
-            component: addbankcard
-        }, {
-            path: '/bountyList',
-            component: bountyList
-        }, {
-            path: '/demotion',
-            component: demotion
-        }, {
-            path: '/memberList',
-            component: memberList
-        }, {
-            path: '/memberOrder',
-            component: memberOrder
-        }, {
-            path: '/orderList',
-            component: orderList
-        }, {
-            path: '/orderSearch',
-            component: orderSearch
-        }, {
-            path:'/orderExport',
-            component:orderExport
-        },
-        {
-            path: '/orderList/orderDetails',
-            component: orderDetails
-        }, {
-            path: '/goodsList',
-            component: goodsList,
-            meta: {
-                keepAlive: true
-            }
-        }, {
-            path: '/goodsList/goodDetails',
-            component: goodDetails
-        }, {
-            path: '/supplier',
-            component: supplier
-        }, {
-            path: '/supplier/courier',
-            component: courier
-        }, {
-            path: '/supplier/freight',
-            component: freight
-        }, {
-            path: '/goodsclassify',
-            component: goodsclassify
-        }, {
-            path: '/specifications',
-            component: specifications
-        }, {
-            path: '/specifications/attribute',
-            component: attribute
-        }, {
-            path: '/subject',
-            component: subject
-        }, {
-            path: '/audioList',
-            component: audioList
-        }, {
-          path: '/tabble',
-          component: tabble
-      }, {
-            path: '/bossShare',
-            component: bossShare
-        }, {
-            path: '/offline',
-            component: offline
-        }, {
-            path: '/offline/offlineGoods',
-            component: offlineGoods
-        }, {
-            path: '/lucky',
-            component: lucky
-        }, {
-            path: '/coupons',
-            component: coupons
-        }, {
-            path: '/coupons/coupons_associated',
-            component: coupons_associated
-        }, {
-            path: '/couponsHd',
-            component: couponsHd
-        }, {
-            path: '/couponsHd/couponsHd_associated',
-            component: couponsHd_associated
-        }, {
-            path: '/luckyDraw',
-            component: luckyDraw
-        }, {
-            path: '/luckyDraw/luckyDrawGoods',
-            component: luckyDrawGoods
-        }, {
-            path: '/homePage',
-            component: homePage
-        }, {
-            path: '/triggerList',
-            component: triggerList
-        }, {
-            path: '/conList',
-            component: conList
-        }, {
-            path: '/taskList',
-            component: taskList
-        }, {
-            path: '/account',
-            component: account
-        }, {
-            path: '/article',
-            component: article
-        }, {
-            path: '/modifyPwd',
-            component: modifyPwd
-        }]
+  // mode: 'history',
+  base: '/',
+  routes: [{
+    path: '/',
+    component: Home,
+    children: [{
+      path: '',
+      component: index
     }, {
-        path: '/login',
-        component: login
-    }]
+      path: '/index',
+      component: index
+    }, {
+      path: '/member',
+      component: member
+    }, {
+      path: '/group',
+      component: group,
+    }, {
+      path: '/group/permissions',
+      component: permissions
+    }, {
+      path: '/group/peoplemanagement',
+      component: peoplemanagement
+    }, {
+      path: '/jurisdictionList',
+      component: jurisdictionList
+    }, {
+      path: '/recharge',
+      component: recharge
+    }, {
+      path: '/becomeBoss',
+      component: becomeBoss
+    }, {
+      path: '/upgradeBoss',
+      component: upgradeBoss
+    }, {
+      path: '/cardbag',
+      component: cardbag
+    }, {
+      path: '/withdraw',
+      component: withdraw
+    }, {
+      path: '/bounty',
+      component: bounty
+    }, {
+      path: '/addbankcard',
+      component: addbankcard
+    }, {
+      path: '/bountyList',
+      component: bountyList
+    }, {
+      path: '/demotion',
+      component: demotion
+    }, {
+      path: '/memberList',
+      component: memberList
+    }, {
+      path: '/memberOrder',
+      component: memberOrder
+    }, {
+      path: '/orderList',
+      component: orderList,
+      meta: {
+        keepAlive: true
+      }
+    }, {
+      path: '/orderSearch',
+      component: orderSearch
+    }, {
+      path: '/orderExport',
+      component: orderExport
+    },
+      {
+        path: '/orderList/orderDetails',
+        component: orderDetails
+      }, {
+        path: '/goodsList',
+        component: goodsList,
+        meta: {
+          keepAlive: true
+        }
+      }, {
+        path: '/goodsList/goodDetails',
+        component: goodDetails
+      }, {
+        path: '/supplier',
+        component: supplier
+      }, {
+        path: '/supplier/courier',
+        component: courier
+      }, {
+        path: '/supplier/freight',
+        component: freight
+      }, {
+        path: '/goodsclassify',
+        component: goodsclassify
+      }, {
+        path: '/specifications',
+        component: specifications
+      }, {
+        path: '/specifications/attribute',
+        component: attribute
+      }, {
+        path: '/subject',
+        component: subject
+      }, {
+        path: '/audioList',
+        component: audioList
+      }, {
+        path: '/tabble',
+        component: tabble
+      }, {
+        path: '/bossShare',
+        component: bossShare
+      }, {
+        path: '/offline',
+        component: offline
+      }, {
+        path: '/offline/offlineGoods',
+        component: offlineGoods
+      }, {
+        path: '/lucky',
+        component: lucky
+      }, {
+        path: '/coupons',
+        component: coupons
+      }, {
+        path: '/coupons/coupons_associated',
+        component: coupons_associated
+      }, {
+        path: '/couponsHd',
+        component: couponsHd
+      }, {
+        path: '/couponsHd/couponsHd_associated',
+        component: couponsHd_associated
+      }, {
+        path: '/luckyDraw',
+        component: luckyDraw
+      }, {
+        path: '/luckyDraw/luckyDrawGoods',
+        component: luckyDrawGoods
+      }, {
+        path: '/homePage',
+        component: homePage
+      }, {
+        path: '/triggerList',
+        component: triggerList
+      }, {
+        path: '/conList',
+        component: conList
+      }, {
+        path: '/taskList',
+        component: taskList
+      }, {
+        path: '/account',
+        component: account
+      }, {
+        path: '/article',
+        component: article
+      }, {
+        path: '/modifyPwd',
+        component: modifyPwd
+      }]
+  }, {
+    path: '/login',
+    component: login
+  }]
 })

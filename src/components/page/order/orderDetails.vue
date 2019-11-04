@@ -3,7 +3,7 @@
     <div class="table-header clearfix">
       <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>订单管理</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/orderList' }">商品订单列表</el-breadcrumb-item>
+        <el-breadcrumb-item ><a href="" @click.prevent="$router.go(-1)">商品订单列表</a></el-breadcrumb-item>
         <el-breadcrumb-item>订单详情</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -85,40 +85,40 @@
             <!--<el-input v-model="v.value"></el-input>-->
             <!--</div>-->
             <!--<div class="box-card">-->
-              <!--<el-form label-width="110px" v-for="v,k in text" label-position="right">-->
-                <!--<el-form-item :label="v.title" prop="goods_name">-->
-                  <!--<el-input v-model="v.value" placeholder=""></el-input>-->
-                <!--</el-form-item>-->
-                <!--<el-form label-width="110px" v-for="v,k in radio" label-position="right">-->
-                  <!--<el-form-item :label="v.title" wx prop="goods_class">-->
-                    <!--<el-select v-model="goods_data.goods_sheet" :placeholder="v.title">-->
-                      <!--<el-option>是</el-option>-->
-                      <!--<el-option>否</el-option>-->
-                    <!--</el-select>-->
-                  <!--</el-form-item>-->
-                <!--</el-form>-->
-                <!--<el-form label-width="110px" v-for="v,k in imgs" label-position="right">-->
-                  <!--<el-form-item :label="v.title" wx prop="goods_class">-->
-                    <!--<div class="banner">-->
-                      <!--&lt;!&ndash;<v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" @orderby="orderby" :image="images_carousel"></v-upload>&ndash;&gt;-->
-                      <!--<img class="imgs" :src="v.value" alt="">-->
-                    <!--</div>-->
-                  <!--</el-form-item>-->
-                <!--</el-form>-->
-                <!--<el-form label-width="110px" v-for="v,k in img" label-position="right">-->
-                  <!--<el-form-item :label="v.title" prop="image">-->
-                    <!--&lt;!&ndash;<v-upload @upresult='upresult' num='image' image="v.value"></v-upload>&ndash;&gt;-->
-                    <!--<img class="imgs" :src="v.value" alt="">-->
-                  <!--</el-form-item>-->
-                <!--</el-form>-->
-                <!--&lt;!&ndash;<el-form-item label="商品分享标题图" prop="share_image" >&ndash;&gt;-->
-                <!--&lt;!&ndash;<v-upload @upresult='shareUpresult' num='share_image' image="goods_data.share_image"></v-upload>&ndash;&gt;-->
-                <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-                <!--&lt;!&ndash;<el-form-item class="flex-cen">&ndash;&gt;-->
-                <!--&lt;!&ndash;<el-button  type="primary" @click="gSumbit('goods_data')">确定</el-button>&ndash;&gt;-->
-                <!--&lt;!&ndash;<el-button  @click="reduction()">取消</el-button>&ndash;&gt;-->
-                <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-              <!--</el-form>-->
+            <!--<el-form label-width="110px" v-for="v,k in text" label-position="right">-->
+            <!--<el-form-item :label="v.title" prop="goods_name">-->
+            <!--<el-input v-model="v.value" placeholder=""></el-input>-->
+            <!--</el-form-item>-->
+            <!--<el-form label-width="110px" v-for="v,k in radio" label-position="right">-->
+            <!--<el-form-item :label="v.title" wx prop="goods_class">-->
+            <!--<el-select v-model="goods_data.goods_sheet" :placeholder="v.title">-->
+            <!--<el-option>是</el-option>-->
+            <!--<el-option>否</el-option>-->
+            <!--</el-select>-->
+            <!--</el-form-item>-->
+            <!--</el-form>-->
+            <!--<el-form label-width="110px" v-for="v,k in imgs" label-position="right">-->
+            <!--<el-form-item :label="v.title" wx prop="goods_class">-->
+            <!--<div class="banner">-->
+            <!--&lt;!&ndash;<v-upload @upresult='banner' @delImg="delImg" num='images_carousel' name='image_path' :multiple="true" @orderby="orderby" :image="images_carousel"></v-upload>&ndash;&gt;-->
+            <!--<img class="imgs" :src="v.value" alt="">-->
+            <!--</div>-->
+            <!--</el-form-item>-->
+            <!--</el-form>-->
+            <!--<el-form label-width="110px" v-for="v,k in img" label-position="right">-->
+            <!--<el-form-item :label="v.title" prop="image">-->
+            <!--&lt;!&ndash;<v-upload @upresult='upresult' num='image' image="v.value"></v-upload>&ndash;&gt;-->
+            <!--<img class="imgs" :src="v.value" alt="">-->
+            <!--</el-form-item>-->
+            <!--</el-form>-->
+            <!--&lt;!&ndash;<el-form-item label="商品分享标题图" prop="share_image" >&ndash;&gt;-->
+            <!--&lt;!&ndash;<v-upload @upresult='shareUpresult' num='share_image' image="goods_data.share_image"></v-upload>&ndash;&gt;-->
+            <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+            <!--&lt;!&ndash;<el-form-item class="flex-cen">&ndash;&gt;-->
+            <!--&lt;!&ndash;<el-button  type="primary" @click="gSumbit('goods_data')">确定</el-button>&ndash;&gt;-->
+            <!--&lt;!&ndash;<el-button  @click="reduction()">取消</el-button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
+            <!--</el-form>-->
             <!--</div>-->
           </el-tab-pane>
         </el-tabs>
