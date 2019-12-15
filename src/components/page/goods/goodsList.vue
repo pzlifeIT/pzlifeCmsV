@@ -29,6 +29,11 @@
           <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="1" :inactive-value="2"></el-switch>
         </template>
       </el-table-column>
+       <el-table-column  prop="is_integral_sale" label="是否积分售卖" >
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.is_integral_sale" @change="is_integral_saleChange(scope.row.id,scope.row.is_integral_sale)" :active-value="2" :inactive-value="1"></el-switch>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" >
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="gogoodslInfo(scope.row.id,scope.row.goods_type)">编辑</el-button>
@@ -263,6 +268,20 @@ export default {
         },
         form:3,
         url: 'goods/updowngoods',
+        error(){
+          that.getgoodslist()
+        }
+      })
+    },
+    is_integral_saleChange(id,is_integral_sale){
+      let that =this;
+      that.$request({
+        data: {
+          id:id,
+          is_integral_sale:is_integral_sale
+        },
+        form:3,
+        url: 'goods/upDownIntegralGoods',
         error(){
           that.getgoodslist()
         }

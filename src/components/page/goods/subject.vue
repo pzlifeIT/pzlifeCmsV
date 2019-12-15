@@ -28,6 +28,11 @@
           <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="1" :inactive-value="2"></el-switch>
         </template>
       </el-table-column>
+      <el-table-column  prop="is_integral_show" label="是否显示在积分售卖区域" >
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.is_integral_show" @change="is_integral_showChange(scope.row.id,scope.row.is_integral_show)" :active-value="2" :inactive-value="1"></el-switch>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作"   >
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="getsubjectdetail(scope.row.id)">编辑</el-button>
@@ -35,7 +40,7 @@
       </el-table-column>
     </el-table>
 
-    <v-card name='商品专题' :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
+    <v-card name='商品专题' :width="180" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
   </div>
 </template>
@@ -86,6 +91,18 @@ export default {
             label:'停用'
           }]
         },
+        'is_integral_show':{
+          type:'select',
+          label:'是否显示在积分售卖区域',
+          placeholder:'请选择状态',
+          option:[{
+            value:1,
+            label:'默认不显示'
+          },{
+            value:2,
+            label:'显示'
+          }]
+        },
         'image':{
           type:'image',
           label:'图片',
@@ -126,6 +143,17 @@ export default {
         data: {
           id:id,
           status:status
+        },
+        form:3,
+        url: 'subject/editsubject',
+      })
+    },
+    is_integral_showChange(id,is_integral_show){
+      let that =this;
+      that.$request({
+        data: {
+          id:id,
+          is_integral_show:is_integral_show
         },
         form:3,
         url: 'subject/editsubject',

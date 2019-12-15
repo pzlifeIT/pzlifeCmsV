@@ -46,6 +46,12 @@
                     </el-option>
                   </el-select>
                 </el-form-item>
+                <el-form-item label="是否积分售卖" prop="giving_rights" >
+                  <el-select  v-model="goods_data.is_integral_sale" placeholder="是否积分售卖">
+                    <el-option v-for="item in is_integral_sale_list" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="产品标题图" prop="image" >
                   <v-upload @upresult='upresult' num='image' :image="goods_data.image"></v-upload>
                 </el-form-item>
@@ -109,6 +115,8 @@
             <el-table-column  prop="retail_price" label="零售价" ></el-table-column>
             <el-table-column  prop="cost_price" label="成本价" ></el-table-column>
             <el-table-column  prop="margin_price" label="其他运费成本" ></el-table-column>
+            <el-table-column  prop="integral_price" label="积分售价" ></el-table-column>
+            <el-table-column  prop="integral_sale_stock" label="积分兑换库存" ></el-table-column>
             <el-table-column  prop="weight" label="重量(单位kg)" ></el-table-column>
             <el-table-column  prop="volume" label="体积(单位m³)" ></el-table-column>
             <el-table-column  prop="freight_title" label="运费" ></el-table-column>
@@ -243,6 +251,11 @@ export default {
           type:'number',
           label:'积分售价',
           placeholder:'请输入积分售价',
+        },
+        'integral_sale_stock':{
+          type:'number',
+          label:'积分兑换库存',
+          placeholder:'积分兑换库存',
         },
         'freight_id':{
           type:'select',
@@ -393,6 +406,13 @@ export default {
       },{
         value:2,
         label:'钻石'
+      }],
+      is_integral_sale_list:[{
+        value:1,
+        label:'默认不售卖'
+      },{
+        value:2,
+        label:'售卖'
       }],
       getAttr:false,
       getFreights:false,
