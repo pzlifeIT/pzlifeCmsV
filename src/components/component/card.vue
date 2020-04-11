@@ -7,7 +7,7 @@
         <el-form :label-width="cWidth+'px'" :model="cRuleForm" ref="cRuleForm"  :rules="cRules">
           
           <el-form-item v-for="(v,k) of cRuleType" :key="k" :label="v.label" :prop="k" v-show="!v.hdplay" >
-            <el-input v-if="v.type === 'input'" v-model="cRuleForm[k]" :type='v.inpType || "text"' :placeholder="v.placeholder"></el-input>
+            <el-input v-if="v.type === 'input'" v-model="cRuleForm[k]" :type='v.inpType || "text"' :placeholder="v.placeholder" :show-password="v.ispasswd"></el-input>
             
             <el-input v-if="v.type === 'number'" v-model.number="cRuleForm[k]" type='number' :placeholder="v.placeholder"></el-input>
 

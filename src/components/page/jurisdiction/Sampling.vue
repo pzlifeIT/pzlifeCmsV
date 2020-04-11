@@ -44,7 +44,8 @@ export default {
         'password':{
           type:'input',
           label:'密码',
-          placeholder:'请输入密码'
+          placeholder:'请输入密码',
+          ispasswd:true
         }
       },
       screen:{
@@ -118,7 +119,8 @@ export default {
       this.ruleType = {
         'password':{
           type:'input',
-          label:'密码'
+          label:'密码',
+          ispasswd:true
         },
         'num':{
           type:'number',
