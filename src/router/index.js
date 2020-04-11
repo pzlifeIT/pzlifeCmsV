@@ -69,6 +69,7 @@ const account = r => require.ensure([], () => r(require('../components/page/supm
 const login = r => require.ensure([], () => r(require('../components/login/login')), 'login')
 
 const modifyPwd = r => require.ensure([], () => r(require('../components/page/jurisdiction/modifyPwd')), 'modifyPwd')
+const Sampling = r => require.ensure([], () => r(require('../components/page/jurisdiction/Sampling')), 'Sampling')
 
 Vue.use(Router)
 
@@ -235,7 +236,11 @@ export default new Router({
       }, {
         path: '/modifyPwd',
         component: modifyPwd
-      }]
+      }, {
+        path: '/Sampling',
+        component: Sampling
+      }
+    ]
   }, {
     path: '/login',
     component: login
