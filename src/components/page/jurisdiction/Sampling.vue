@@ -5,39 +5,26 @@
         <el-breadcrumb-item>权限管理</el-breadcrumb-item>
         <el-breadcrumb-item>采样细胞检查</el-breadcrumb-item>
       </el-breadcrumb>
-      <el-button class="add fr" type="primary" icon="el-icon-plus" @click="showCard()">添加银行</el-button>
+      <el-button class="add fr" type="primary" icon="el-icon-plus" @click="showCard()">添加</el-button>
   </div>
 
     <v-screen :screen="screenQuery" @query="onQuery" ></v-screen>
 
     <el-table :data="admin_bank" border style="width: 100%">
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column  prop="abbrev" label="银行英文缩写名" ></el-table-column>
-      <el-table-column  prop="bank_name" label="银行全称" ></el-table-column>
-      <el-table-column  prop="icon_img" label="银行图标" >
-        <template slot-scope="scope">
-          <img :src="scope.row.icon_img" width="40"  class="head_pic"/>
-        </template>
-      </el-table-column>
-      <el-table-column  prop="bg_img" label="银行背景图片" >
-        <template slot-scope="scope">
-          <img :src="scope.row.bg_img" width="40"  class="head_pic"/>
-        </template>
-      </el-table-column>
-      <el-table-column  prop="status" label="状态" >
-        <template slot-scope="scope">
-          <el-switch v-model="scope.row.status" @change="statusChange(scope.row.id,scope.row.status)" :active-value="1" :inactive-value="2"></el-switch>
-        </template>
-      </el-table-column>
+      <el-table-column  prop="card_number" label="卡号" ></el-table-column>
+      <el-table-column  prop="type" label="产品类型" ></el-table-column>
+      <el-table-column  prop="passwd" label="密码" ></el-table-column>
+      <el-table-column  prop="create_time" label="创建时间" ></el-table-column>
       <el-table-column fixed="right" label="操作"  width="350">
-        <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="getAdminBankInfo(scope.row.id)">编辑</el-button>
-        </template>
+        <!--<template slot-scope="scope">-->
+          <!--<el-button type="primary" size="small" @click="getAdminBankInfo(scope.row.id)">编辑</el-button>-->
+        <!--</template>-->
       </el-table-column>
     </el-table>
     <v-pagination @pageChange="pageChange" :num='num' :total="total"></v-pagination>
 
-    <v-card name='支持银行' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
+    <v-card name='验证' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
 
   </div>
 </template>
@@ -50,76 +37,69 @@ export default {
   data(){
     return {
       num:1,
-      cardStatus:false,
+      cardStatus:true,
       ruleForm:{},
-      rules:['abbrev','bank_name',],
+      rules:['password'],
       ruleType:{
-        'abbrev':{
+        'password':{
           type:'input',
-          label:'银行英文缩写名',
-          placeholder:'请输入银行英文缩写名'
-        },
-        'bank_name':{
-          type:'input',
-          label:'银行全称',
-          placeholder:'请输入银行全称'
-        },
-        'icon_img':{
-          type:'image',
-          label:'银行图标',
-        },
-        'bg_img':{
-          type:'image',
-          label:'银行背景图',
-        },
-        'status':{
-          type:'select',
-          label:'状态',
-          placeholder:'请选择(默认停用)',
-          option:[{
-            value: 1,
-            label: '启用'
-          }, {
-              value: 2,
-              label: '停用'
-          }]
-        },
+          label:'密码',
+          placeholder:'请输入密码'
+        }
       },
       screen:{
         page:1,
         page_num:10
       },
       screenQuery:[{
-        ref:'abbrev',
-        label:'银行英文缩写名',
-        placeholder:'请输入银行英文缩写名',
+        ref:'datekey',
+        label:'生成时间',
+        placeholder:'例如：20200202',
         type:'input',
         content:'',
       },{
-        ref:'bank_name',
-        label:'银行全称',
-        type:'input',
-        content:'',
-        placeholder:'请输入银行全称'
-      },{
-        ref:'status',
-        label:'状态',
+        ref:'type',
+        label:'产品类型',
         type:'select',
-        content:'',
-        option:[{
-            value: '',
-            label: '全部'
-        }, {
+        option:[
+          {
             value: 1,
-            label: '启用'
-        }, {
+            label: '产品1'
+          }, {
             value: 2,
-            label: '停用'
-        }]
+            label: '产品2'
+          }, {
+            value: 3,
+            label: '产品3'
+          },
+          {
+            value: 4,
+            label: '产品4'
+          },
+          {
+            value: 5,
+            label: '产品5'
+          },{
+            value: 6,
+            label: '产品6'
+          }
+          ,{
+            value: 7,
+            label: '产品7'
+          }
+          ,{
+            value: 8,
+            label: '产品8'
+          },{
+            value: 9,
+            label:'产品9'
+          }
+        ]
       }],
       admin_bank:[],
       admin_bankId:'',
-      total:0
+      total:0,
+      password:''
     }
   },
   components:{
@@ -128,12 +108,67 @@ export default {
       vCard
   },
   mounted(){
-    this.getAdminBank()
+
   },
   methods: {
     showCard(){
       this.ruleForm = {}
+      this.ruleType = {}
       this.cardStatus = true
+      this.ruleType = {
+        'password':{
+          type:'input',
+          label:'密码'
+        },
+        'num':{
+          type:'number',
+          label:'生成数量'
+        },
+        'type':{
+          type:'select',
+          label:'产品类型',
+          option: [
+            {
+              value: 1,
+              label: '产品1'
+            }, {
+              value: 2,
+              label: '产品2'
+            }, {
+              value: 3,
+              label: '产品3'
+            },
+            {
+              value: 4,
+              label: '产品4'
+            },
+            {
+              value: 5,
+              label: '产品5'
+            },{
+              value: 6,
+              label: '产品6'
+            }
+            ,{
+              value: 7,
+              label: '产品7'
+            }
+            ,{
+              value: 8,
+              label: '产品8'
+            },{
+              value: 9,
+              label:'产品9'
+            }
+          ]
+        },
+        'start_num':{
+          type:'input',
+          label:'卡号起始数字'
+        }
+      }
+      this.ruleForm.submitType = 1
+      this.rules = ['password','num','type','start_num']
     },
     hideCard(){
       this.cardStatus = false
@@ -152,33 +187,14 @@ export default {
       })
     },
     sumbit(data){
-      data.ruleForm.id ? this.editAdminBank(data.ruleForm) : this.addAdminBank(data.ruleForm)
-    },
-    addAdminBank(data){
-      let that =this;
-      that.$request({
-        data: data,
-        url: 'admin/addAdminBank',
-        form:1,
-        success(res){
-          that.ruleForm = {}
-          that.getAdminBank()
-          that.cardStatus = false
-        }
-      })
-    },
-    editAdminBank(data){
-      let that =this;
-      that.$request({
-        data: data,
-        url: 'admin/editAdminBank',
-        form:3,
-        success(res){
-          that.ruleForm = {}
-          that.getAdminBank()
-          that.cardStatus = false
-        }
-      })
+      console.log(data)
+      this.password = data.ruleForm.password
+      if (data.ruleForm.submitType == 1){
+        this.createInfo(data)
+      } else {
+        this.getAdminBank()
+      }
+
     },
     onQuery(screen){
       this.extend(this.screen,screen);
@@ -196,27 +212,32 @@ export default {
         this.screen.page = obj.page
         this.getAdminBank()
     },
-    getAdminBankInfo(id){
-      let that =this;
+    createInfo(data){
+      let that = this
       that.$request({
-        data: {
-          id:id
-        },
-        url: 'admin/getAdminBank',
+        url:'admin/samplingCreateTool',
+        data:data.ruleForm,
+        form:1,
         success(res){
-          that.ruleForm = res.admin_bank || {}
-          that.cardStatus = true
+          that.cardStatus = false
+          that.getAdminBank()
         }
       })
     },
     getAdminBank(){
       let that =this;
+      if (!that.password) {
+        that.$message.error('请先输入密码')
+        return
+      }
+      that.screen.password = that.password
       that.$request({
         data: that.screen,
-        url: 'admin/getAdminBank',
+        url: 'admin/getSamplingNumber',
         success(res){
-          that.admin_bank = res.admin_bank
+          that.admin_bank = res.result
           that.total = res.total || 0;
+          that.cardStatus = false
         }
       })
     }
