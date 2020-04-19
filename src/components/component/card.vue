@@ -11,7 +11,7 @@
             
             <el-input v-if="v.type === 'number'" v-model.number="cRuleForm[k]" type='number' :placeholder="v.placeholder"></el-input>
 
-            <el-select v-if="v.type === 'select'"  :filterable="v.filterable || false" class="" v-model="cRuleForm[k]" :placeholder="v.placeholder" :multiple="v.multiple || false">
+            <el-select v-if="v.type === 'select'"  :filterable="v.filterable || false" class="" v-model="cRuleForm[k]" :placeholder="v.placeholder" :multiple="v.multiple || false" @change="selectItem(cRuleForm[k],k)">
               <el-option v-for="item in v.option" :key="item.value  || item[v.val]" :label="item.label || item[v.lab]" :value="item.value || item[v.val]">
               </el-option>
             </el-select>
@@ -76,6 +76,9 @@ export default {
       vUpload
   },
   methods: {
+    selectItem(value,k){
+      this.$emit('selectItem',value,k)
+    },
     upresult(data){
       this.cRuleForm[data.num] = data.image_path
     },

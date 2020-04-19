@@ -70,7 +70,8 @@ const login = r => require.ensure([], () => r(require('../components/login/login
 
 const modifyPwd = r => require.ensure([], () => r(require('../components/page/jurisdiction/modifyPwd')), 'modifyPwd')
 const Sampling = r => require.ensure([], () => r(require('../components/page/jurisdiction/Sampling')), 'Sampling')
-
+const draw = r => require.ensure([], () => r(require('../components/page/jurisdiction/draw')), 'draw')
+const table = r => require.ensure([], () => r(require('../components/page/jurisdiction/table')), 'table')
 Vue.use(Router)
 
 export default new Router({
@@ -239,10 +240,16 @@ export default new Router({
       }, {
         path: '/Sampling',
         component: Sampling
-      }
+      }, {
+        path: '/draw',
+        component: draw
+      },
     ]
   }, {
     path: '/login',
     component: login
+  },{
+    path: '/table',
+    component: table
   }]
 })

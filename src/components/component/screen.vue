@@ -10,7 +10,7 @@
 
           <el-date-picker v-else-if="v.type == 'date'" v-model="v.content" type="datetime"  value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间" default-time="00:00:00"></el-date-picker>
 
-          <el-select class="select" v-else-if="v.type == 'select'" :filterable="v.filterable || false" v-model="v.content" placeholder="请选择">
+          <el-select class="select" v-else-if="v.type == 'select'" :filterable="v.filterable || false" v-model="v.content" @change="selectItem(v.content,k)" placeholder="请选择">
 
           <el-option v-for="item in v.option" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
@@ -36,6 +36,9 @@ export default {
 
   },
   methods: {
+    selectItem(value,k){
+      this.$emit('screenItem',value,k)
+    },
     onQuery(){
       let data = this.screen,
       len=data.length,
