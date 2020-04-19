@@ -158,9 +158,12 @@
         }
       },
       edit(data){
-        console.log(data)
+        // console.log(data)
         this.ruleForm = {}
         this.ruleForm = data
+        console.log(this.ruleForm)
+        this.getProvince(this.ruleForm.province_id)
+        this.getCity(this.ruleForm.city_id)
         this.cardStatus = true
       },
       selectItem(proId, k) {
