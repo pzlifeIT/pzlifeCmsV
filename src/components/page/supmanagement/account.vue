@@ -11,7 +11,7 @@
     <el-table :data="supplierList" border style="width: 100%">
       <el-table-column type="index" label="序号"></el-table-column>
       <el-table-column  prop="sup_name" label="账号名称" ></el-table-column>
-      <el-table-column  prop="mobile" label="手机号" ></el-table-column>
+      <el-table-column  prop="mobile" label="号码" ></el-table-column>
     </el-table>
     <v-pagination @pageChange="pageChange" :total="total"></v-pagination>
 
@@ -37,9 +37,9 @@ export default {
           placeholder:'请输入供应商账号名称'
         },
         'mobile':{
-          type:'number',
-          label:'手机号',
-          placeholder:'请输入手机号'
+          type:'input',
+          label:'账号',
+          placeholder:'请输入账号'
         },
       },
       screen:{
