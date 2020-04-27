@@ -1,4 +1,3 @@
-import {Message} from 'element-ui';
 
 let errCollect = {
   ModelMessage: {
@@ -325,7 +324,7 @@ let errCollect = {
       3001: '账号不能为空',
       3002: '手机号格式有误',
       3003: '账号名称已存在',
-      3004: '未注册用户不能添加',
+      3004: '该账号已存在',
       3005: '添加失败'
     },
     getsuppliers: {

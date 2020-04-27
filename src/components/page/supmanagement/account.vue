@@ -12,11 +12,32 @@
       <el-table-column type="index" label="序号"></el-table-column>
       <el-table-column  prop="sup_name" label="账号名称" ></el-table-column>
       <el-table-column  prop="mobile" label="号码" ></el-table-column>
+      <el-table-column  label="操作" >
+        <template slot-scope="{row}">
+          <el-button type="primary" @click="add(row.id)">添加子账户</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <v-pagination @pageChange="pageChange" :total="total"></v-pagination>
 
     <v-card name='线下活动' width="120" :cardStatus="cardStatus" :ruleType="ruleType" :ruleForm="ruleForm" :rules="rules" @sumbit="sumbit" @hideCard="hideCard"></v-card>
-
+    <el-dialog
+      title="添加子账户"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <el-form>
+        <el-form-item label="子账户名称">
+          <el-input v-model="child_name" placehold="请输入账户名称"></el-input>
+        </el-form-item>
+        <el-form-item label="子账户账号">
+          <el-input v-model="child_num" placehold="请输入账号"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="addChild">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -47,7 +68,11 @@ export default {
         page_num:10
       },
       supplierList:[],
-      total:0
+      total:0,
+      dialogVisible:false,
+      account_id:0,
+      child_num:'',
+      child_name:''
     }
   },
   components:{
@@ -58,6 +83,26 @@ export default {
     this.supplieradminlist()
   },
   methods: {
+    add(id){
+      this.account_id = id
+      this.dialogVisible = true
+    },
+    addChild(){
+      let that = this
+      that.$request({
+        url:'suppliers/addsupplieradmin',
+        data:{
+          sup_id:that.account_id,
+          sup_name:that.child_name,
+          mobile:that.child_num
+        },
+        form: 1,
+        success(res){
+          that.dialogVisible = false
+          that.supplieradminlist()
+        }
+      })
+    },
     showCard(){
       this.ruleForm = {}
       this.cardStatus = true
