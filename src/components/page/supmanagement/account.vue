@@ -15,6 +15,7 @@
       <el-table-column  label="操作" >
         <template slot-scope="{row}">
           <el-button type="primary" @click="add(row.id)">添加子账户</el-button>
+          <el-button type="primary" @click="check(row.id)">查看子账户</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -67,6 +68,10 @@ export default {
         page:1,
         page_num:10
       },
+      sonScrees:{
+        page:1,
+        page_num:10
+      },
       supplierList:[],
       total:0,
       dialogVisible:false,
@@ -83,6 +88,9 @@ export default {
     this.supplieradminlist()
   },
   methods: {
+    check(id){
+      this.$router.push({path:'/sonList',query:{id:id}})
+    },
     add(id){
       this.account_id = id
       this.dialogVisible = true

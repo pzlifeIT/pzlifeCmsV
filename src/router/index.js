@@ -72,6 +72,7 @@ const modifyPwd = r => require.ensure([], () => r(require('../components/page/ju
 const Sampling = r => require.ensure([], () => r(require('../components/page/jurisdiction/Sampling')), 'Sampling')
 const draw = r => require.ensure([], () => r(require('../components/page/jurisdiction/draw')), 'draw')
 const table = r => require.ensure([], () => r(require('../components/page/jurisdiction/table')), 'table')
+const sonList = r=>require.ensure([],()=>r(require('../components/page/supmanagement/sonList')),'sonList')
 Vue.use(Router)
 
 export default new Router({
@@ -244,6 +245,10 @@ export default new Router({
         path: '/draw',
         component: draw
       },
+      {
+        path:'/sonList',
+        component:sonList
+      }
     ]
   }, {
     path: '/login',
